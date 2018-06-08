@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <title>Constitution Annotated</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simplified website for looking at elasticsearch data">
+    <meta name="author" content="Jettro Coenradie">
+    <meta name="author" content="Ari Hershowitz">
+
+    <!-- Le styles -->
+    <link href="assets/css/app.min.css" rel="stylesheet">
+</head>
+
+<body >
+
+<div>
+    <navbar heading="Constitution Annotated (demo)">
+    </navbar>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" ng-view>
+        </div>
+    </div>
+
+    <hr>
+
+    
+</div>
+<div class="navbar navbar-default navbar-fixed-bottom" style="min-height:20px !important">
+</div>
+<!--/.fluid-container-->
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="assets/js/elasticsearch-gui.min.js"></script>
+
+</body>
+</html>

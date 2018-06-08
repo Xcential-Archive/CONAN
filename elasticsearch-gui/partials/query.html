@@ -1,0 +1,93 @@
+<!--div class="row">
+    <div class="col-md-9">
+        <div id="chooseIndexBtn" class="btn-group">
+            <button type="button" class="btn btn-xs btn-info" ng-model="index.state" ng-repeat="index in query.indices"
+                    btn-checkbox>{{index.name}}
+            </button>
+        </div>
+    </div>
+</div-->
+<form novalidate class="form-search" ng-submit="restartSearch()">
+    <div class="row" style="padding-bottom: 5px">
+        <div class="col-md-12 alert alert-info" ng-show="query.multiSearch">
+            <div class="row" style="margin-bottom:10px;">
+                <!--div class="col-xs-3">
+                    <select class="form-control" ng-model="query.advanced.newField"
+                            ng-options="key as value.forPrint for (key,value) in fields">
+                    </select>
+                </div-->
+                <div class="col-xs-8">
+                    <input class="form-control" type="search" ng-model="query.advanced.newText" autofocus="true"
+                           placeholder="Type your search string"/>
+                </div>
+               <button class="btn btn-info" ng-click="addSearchField()"><span class="glyphicon glyphicon-search glyphicon-white"></span> Search</button>
+            
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row" ng-show="queryResults.hits">
+    <div class="col-md-12">
+        <div class="panel panel-default" style="margin-left:-15px;">
+            <div class="panel-heading">
+                <h3 class="panel-title">Results</h3>
+
+                <p style="margin-top:10px;">Total hits "{{queryResults.total}}"</p>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-1">
+                        <span class="text-info">Location</span>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="text-info">Text</span>
+                    </div>
+                </div>
+
+                <div ng-repeat="doc in queryResults.hits" style="margin-bottom:15px">
+                    <div class="row" ng-click="doc.showDetails = !doc.showDetails;" style="cursor:pointer;" >
+                        <div class="col-xs-1 col-md-1" ng-style="doc.showDetails && {'background-color': '#31beb1'}" style="background-clip:content-box">p.{{doc._source['pagenumber']}}</div>
+                        <div class="col-xs-6 col-sm-6 col-md-9" ng-bind-html="doc.highlight['text'].join('...')"></div>
+                    </div>
+                    <div class="row" ng-show="doc.showDetails">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <table class="table table-condensed" style="background-color: #F0F0F0; border-left: 3px solid #31beb1;">
+                                        <tr >
+                                            <th >Keywords</th>
+                                            <td><span ng-repeat="keyword in doc._source.keywords">{{keyword[0]}}&#160;({{keyword[1].toFixed(2)}})&#160;&#160;</span></span></td>
+                                        </tr>
+                                        <tr style="height:480px">
+                                            <th >Preview&#160;(<a href="{{doc.pdfurl| trustAsResourceUrl}}" target="_blank">pdf</a>)</th>
+                                            <td ng-if="doc.showDetails"><iframe ng-src="{{doc.htmlurl}}" style="width: 400px; height: 300px; max-height: 300px; background:white; opacity:1; border: 1px solid black; -ms-zoom: 1.5;
+                                                    -moz-transform: scale(1.5);
+                                                    -moz-transform-origin: 0 0;
+                                                    -o-transform: scale(1.5);
+                                                    -o-transform-origin: 0 0;
+                                                    -webkit-transform: scale(1.5);
+                                                    -webkit-transform-origin: 0 0; "></iframe></td>
+                                            <!--td><div ng-bind-html="doc._source.html"></div></td-->
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm"
+                            max-size="maxSize" ng-change="changePage()" previous-text="&lsaquo;" next-text="&rsaquo;"
+                            first-text="&laquo;" last-text="&raquo;"></pagination>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.chooseIndexBtn').button();
+    $('.chooseTypeBtn').button();
+</script>
