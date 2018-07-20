@@ -12,7 +12,7 @@ from pdfminer.pdfpage import PDFPage
 from elasticsearch import Elasticsearch
 es = Elasticsearch()
 
-INDEX = 'constitution'
+INDEX = 'oregontitles'
 DOCTYPE = 'page'
 
 def convert(page, html=None):
@@ -65,61 +65,10 @@ def convertPages(fname, pages = None):
         print(pagenumber)
     infile.close()
 
-def getBestTerms(terms,maxTerms=5):
-    termScores={term:terms[term]['doc_freq']/terms[term]['ttf'] for term in terms if len(term)>3 and (not term.isdigit()) and terms[term]['doc_freq']>1 and terms[term]['doc_freq']/terms[term]['ttf']<1}
-    sortedTerms = sorted(termScores.items(), key=operator.itemgetter(1), reverse=True)
-    return sortedTerms[0:maxTerms]
-
-from monkeylearn import MonkeyLearn
-ml = MonkeyLearn('29499a676f605f72793d2290f5bdd8e6ac4d0868')
-module_id = 'ex_y7BPYzNG'
-def getKeywords(textList):
-    text_list = textList
-    res = ml.extractors.extract(module_id, text_list)
-    return res.result
-
-def setAllTerms(maxTerms=5):
-    numdocs = es.count(index=INDEX, doc_type=DOCTYPE)['count']
-    print(numdocs)
-    for pageindex in range(numdocs):
-        resp = es.search(index=INDEX, doc_type=DOCTYPE, body={"query": {"match":{"pageindex":pageindex}}})
-        doc = resp['hits']['hits'][0]
-        docID=doc['_id']
-        #termvector = es.termvector(index=INDEX, doc_type=DOCTYPE, id=docID, body={"fields":["text"],"offsets":"false","positions":"false","term_statistics":"true","field_statistics":"true"})
-        try:
-            #terms = termvector['term_vectors']['text']['terms']
-            keywords = getKeywords([doc['_source']['text']])
-            bestTerms = [[keyword['keyword'],float(keyword['relevance'])] for keyword in keywords]
-            es.update(index=INDEX, doc_type=DOCTYPE, id=docID, body={"doc": {"keywords":bestTerms}})
-            print(pageindex)
-            print(keywords)
-            print(bestTerms)
-        except:
-            pass
-
-def setAllTermsBatch(start=0,batch=200):
-    numdocs = es.count(index=INDEX, doc_type=DOCTYPE)['count']
-    print(numdocs)
-    for pageindex in range(start,numdocs,batch):
-        resp = es.search(index=INDEX, doc_type=DOCTYPE, size=batch, body={"query": {"range":{"pageindex": {"gte" : pageindex,"lt" : pageindex+batch}}}})
-        docBatch = resp['hits']['hits']
-        textBatch = [doc['_source']['text'] for doc in docBatch]
-        print(len(textBatch))
-        keywordBatch = getKeywords(textBatch)
-        print(keywordBatch)
-        print(len(keywordBatch))
-        for index, keywords in enumerate(keywordBatch):
-            bestTerms = [[keyword['keyword'],float(keyword['relevance'])] for keyword in keywords]
-            doc =  docBatch[index]
-            docID=doc['_id']
-            print(doc['_source']['pageindex'])
-            es.update(index=INDEX, doc_type=DOCTYPE, id=docID, body={"doc": {"keywords":bestTerms}})
-
-
 #Split pdf into one page pdfs
 from pyPdf import PdfFileWriter, PdfFileReader
 
-def makeOnePagersOld(filename='GPO-CONAN-REV-2014.pdf' ,path='pdf/'):
+def makeOnePagersOld(filename='2015ors035.pdf' ,path='pdf/'):
     infile = PdfFileReader(open(filename, 'rb'))
     print(infile.getNumPages())
     for i in range(infile.getNumPages()):
@@ -130,7 +79,7 @@ def makeOnePagersOld(filename='GPO-CONAN-REV-2014.pdf' ,path='pdf/'):
         outfile.write(outputStream)
         outputStream.close()
 
-def makeOnePagersOld2(filename='GPO-CONAN-REV-2014.pdf' ,path='pdf/'):
+def makeOnePagersOld2(filename='2015ors035.pdf' ,path='pdf/'):
     infile = file(filename, 'rb')
     for i, page in enumerate(PDFPage.get_pages(infile)):
         with open(path+'pageindex-%0s.pdf' % str(i), 'wb') as f:
@@ -140,7 +89,7 @@ def makeOnePagersOld2(filename='GPO-CONAN-REV-2014.pdf' ,path='pdf/'):
 #Split pdf into one page pdfs
 from pdfrw import PdfWriter, PdfReader
 
-def makeOnePagers(filename='GPO-CONAN-REV-2014.pdf' ,path='pdf/'):
+def makeOnePagers(filename='2015ors035.pdf' ,path='pdf/'):
     infile = PdfReader(filename)
     pages = len(infile.pages)
     print(pages)

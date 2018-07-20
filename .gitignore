@@ -1,1 +1,5 @@
 venv/
+pdf/
+.vscode
+.DS_Store
+
