@@ -1,6 +1,7 @@
-# ConstitutionAnnotated
-Search data for Constitution Annotated
+# Oregon Laws
+Search data for Oregon laws
 
+Based on an earlier demo by Xcential for the Constitution Annotated:
 [Demo](http://ca.linkedlegislation.com)
 
 ## Quick Start (development)
@@ -8,7 +9,7 @@ Search data for Constitution Annotated
 2. Initialize the UI submodule in elasticsearch-gui:
 `git submodule update --init`
 
-3. [Install Elasticsearch 1.x](https://www.elastic.co/guide/en/elasticsearch/reference/1.7/_installation.html). Later versions will not work with the data dump format or the UI. These can be updated with moderate effort (a day or two), by changing the index mapping syntax and re-indexing the pdfs.
+3. [Install Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html). 
 
 2. Add CORS support by adding the following lines to config/elasticsearch.yml:
 ```
@@ -17,19 +18,21 @@ http.cors.allow-origin: "*"
 ```
 
 3. Start Elasticsearch: `$./bin/elasticsearch`
-4. Install [elasticdump](https://github.com/taskrabbit/elasticsearch-dump)
-5. Load the constitutionmapping.json mapping to your local ES instance:
-```
-elasticdump --input=./constitutionsearchmap.json --type=mapping --output=http://localhost:9200/constitution
-```
-5. Load the search data to your local ES instance:
-```
-elasticdump --input=./constitutionsearch.json --type=data --output=http://localhost:9200/constitution
-```
-6. Serve elasticsearch-gui from a static local server (e.g. for Python, `python -m SimpleHTTPServer 8000`)
+4. Install python dependencies from requirements.txt (uses Python ~2.7)
+5. Index the desired pdf from pdfconvert.py *More detailed instructions needed here*
+    a. Update the configurations for the pdf path and the elasticsearch index
+    b. run `makeOnePagers()`
+    c. run `convertPages()`
+    d. Convert pdf files to html using https://github.com/coolwanglu/pdf2htmlEX, using the split pages command. See [pdf2htmlEx QuickStart](https://github.com/coolwanglu/pdf2htmlEX/wiki/Quick-Start) For example:
+    `pdf2htmlEX --embed cfijo --split-pages 1 --dest-dir out --page-filename test-%d.page pdf/test.pdf`
+    e. Store the pdf and html directory in elasticsearch-gui
+6. Update `elasticsearch-gui/javascript/Configuration-Service.js` to point to the desired index. *Update this to allow the user to select an index from the UI`
 
-7. Navigate to /index.html
+7. Serve and Run through Nginx:
+    a. Install nginx
+    b. Run nginx with the nginx.conf provided. This uses a proxy at `/elasticproxy` to access elasticsearch on localhost:9200.
+    c. Navigate to /index.html
 
-8. See ConstitionAnnotatedScreenshot.png for a preview of the search UI.
-In production, ES may be served through a proxy server to the /elasticproxy url on your server. On Linux, you can use the sample nginx.conf to serve ES as a proxy.
+
+
 
