@@ -12,8 +12,9 @@ from pdfminer.pdfpage import PDFPage
 from elasticsearch import Elasticsearch
 es = Elasticsearch()
 
-INDEX = 'oregonproperty'
+INDEX = 'oregonwater'
 DOCTYPE = 'page'
+pdfFilePath = 'Water_Vol_I.pdf'
 
 def convert(page, html=None):
 
@@ -46,7 +47,7 @@ def getPageNumber(text):
 def savePage(pageindex, pagenumber, text, html):
     es.index(index=INDEX, doc_type=DOCTYPE, body={"pageindex":pageindex, "pagenumber":pagenumber, "text":text, 'html':html, 'keywords':[]})
 
-def convertPages(fname, pages = None):
+def convertPages(fname=pdfFilePath, pages = None):
     if not pages:
         pagenums = set()
     else:
@@ -68,7 +69,7 @@ def convertPages(fname, pages = None):
 #Split pdf into one page pdfs
 from pyPdf import PdfFileWriter, PdfFileReader
 
-def makeOnePagersOld(filename='2015ors035.pdf' ,path='pdf/'):
+def makeOnePagersOld(filename=pdfFilePath ,path='pdf/'):
     infile = PdfFileReader(open(filename, 'rb'))
     print(infile.getNumPages())
     for i in range(infile.getNumPages()):
@@ -79,7 +80,7 @@ def makeOnePagersOld(filename='2015ors035.pdf' ,path='pdf/'):
         outfile.write(outputStream)
         outputStream.close()
 
-def makeOnePagersOld2(filename='2015ors035.pdf' ,path='pdf/'):
+def makeOnePagersOld2(filename=pdfFilePath ,path='pdf/'):
     infile = file(filename, 'rb')
     for i, page in enumerate(PDFPage.get_pages(infile)):
         with open(path+'pageindex-%0s.pdf' % str(i), 'wb') as f:
@@ -89,7 +90,7 @@ def makeOnePagersOld2(filename='2015ors035.pdf' ,path='pdf/'):
 #Split pdf into one page pdfs
 from pdfrw import PdfWriter, PdfReader
 
-def makeOnePagers(filename='2015ors035.pdf' ,path='pdf/'):
+def makeOnePagers(filename=pdfFilePath ,path='pdf/'):
     infile = PdfReader(filename)
     pages = len(infile.pages)
     print(pages)

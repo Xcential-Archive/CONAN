@@ -79069,7 +79069,7 @@ function QueryCtrl($scope, $modal, elastic, aggregateBuilder, queryStorage) {
 
     $scope.query.doctypes = [{'name':'bill'},{'name':'act'},{'name':'amendment'}];
 
-    $scope.query.subjects={0:{'name':'Courts','forPrint':'Courts, Civil Procedure(1-55)'},1:{'name':'Business Organizations, Commercial Code','forPrint':'Business Organizations, Commercial Code(56-88)'},2:{'name':'Landlord-Tenant, Domestic Relations, Probate','forPrint':'Landlord-Tenant, Domestic Relations, Probate (90-131A)'}, 3:{'name':'...','forPrint':'...'}, 4:{'name':'Eminent Domain; Public Acquisition of Property','forPrint':'Eminent Domain; Public Acquisition of Property'}};
+    $scope.query.subjects={0:{'name':'Courts','forPrint':'Courts, Civil Procedure(1-55)'},1:{'name':'Business Organizations, Commercial Code','forPrint':'Business Organizations, Commercial Code(56-88)'},2:{'name':'Landlord-Tenant, Domestic Relations, Probate','forPrint':'Landlord-Tenant, Domestic Relations, Probate (90-131A)'}, 3:{'name':'...','forPrint':'...'}, 4:{'name':'Eminent Domain; Public Acquisition of Property','forPrint':'Eminent Domain; Public Acquisition of Property'}, 5:{'name':'Water', 'forPrint':'Water (Title 45)'}, };
 
 
     // initialize pagination
@@ -79556,7 +79556,7 @@ serviceModule.factory('configuration', ['$rootScope', 'localStorage', '$location
             configuration = {
                 title: undefined,
                 description: undefined,
-                includedIndexes: 'oregonproperty',
+                includedIndexes: ['oregonproperty', 'oregonwater'],
                 displayFields: undefined,
                 highlightFields: undefined,
                 excludedIndexes: undefined,
