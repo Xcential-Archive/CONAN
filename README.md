@@ -23,7 +23,9 @@ http.cors.allow-origin: "*"
     a. Update the configurations for the pdf path and the elasticsearch index
     b. run `makeOnePagers()`
     c. run `convertPages()`
-    d. Convert pdf files to html using https://github.com/coolwanglu/pdf2htmlEX. Store the pdf and html directory in elasticsearch-gui
+    d. Convert pdf files to html using https://github.com/coolwanglu/pdf2htmlEX, using the split pages command. See [pdf2htmlEx QuickStart](https://github.com/coolwanglu/pdf2htmlEX/wiki/Quick-Start) For example:
+    `pdf2htmlEX --embed cfijo --split-pages 1 --dest-dir out --page-filename test-%d.page pdf/test.pdf`
+    e. Store the pdf and html directory in elasticsearch-gui
 6. Update `elasticsearch-gui/javascript/Configuration-Service.js` to point to the desired index. *Update this to allow the user to select an index from the UI`
 
 7. Serve and Run through Nginx:
