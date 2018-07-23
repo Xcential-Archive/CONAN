@@ -79067,6 +79067,10 @@ function QueryCtrl($scope, $modal, elastic, aggregateBuilder, queryStorage) {
     $scope.query.advanced.newType = 'or';
     $scope.query.multiSearch=true;
 
+    $scope.query.doctypes = [{'name':'bill'},{'name':'act'},{'name':'amendment'}];
+
+    $scope.query.subjects={0:{'name':'Courts','forPrint':'Courts, Civil Procedure(1-55)'},1:{'name':'Business Organizations, Commercial Code','forPrint':'Business Organizations, Commercial Code(56-88)'},2:{'name':'Landlord-Tenant, Domestic Relations, Probate','forPrint':'Landlord-Tenant, Domestic Relations, Probate (90-131A)'}, 3:{'name':'...','forPrint':'...'}};
+
 
     // initialize pagination
     $scope.currentPage = 1;
@@ -79274,14 +79278,16 @@ function QueryCtrl($scope, $modal, elastic, aggregateBuilder, queryStorage) {
                 "pre_tags" : ["<mark>"],
                 "post_tags" : ["</mark>"], 
                 "encoder" : "html",
-                "fields": {
-                    "text":{"fragmentSize":"120"}
-                }};
+                "fields" : {
+                    "text" : {}
+                }
+                };
 
         var query = {};
         query.index = "";
         query.body = {};
         query.body.query = {};
+
 
         query.size = $scope.pageSize;
         query.from = ($scope.currentPage - 1) * $scope.pageSize;
@@ -79293,6 +79299,7 @@ function QueryCtrl($scope, $modal, elastic, aggregateBuilder, queryStorage) {
             }
         });
         query.index = chosenIndices.toString();
+
 
 
         var query_string =  {
@@ -79543,13 +79550,13 @@ serviceModule.factory('configuration', ['$rootScope', 'localStorage', '$location
                 host = $location.protocol() + "://" + $location.host() + ":" + $location.port();
             }
             */
-            //host = $location.protocol() +"://" + $location.host()+"/elasticproxy";
-            host = "http://localhost:9200";
+            host = $location.protocol() +"://" + $location.host()+"/elasticproxy";
+            //host = "http://localhost:9200";
 
             configuration = {
                 title: undefined,
                 description: undefined,
-                includedIndexes: 'oregontitles',
+                includedIndexes: 'oregonproperty',
                 displayFields: undefined,
                 highlightFields: undefined,
                 excludedIndexes: undefined,
@@ -80008,6 +80015,7 @@ serviceModule.factory('serverConfig', ['$location', function ($location) {
         } else {
             this.host = location.protocol() + "://" + location.host() + ":" + location.port();
         }
+        this.host = location.protocol() + "://" + location.host() + ":" + location.port();
     }
 
     return new ServerConfig($location);

@@ -7,6 +7,30 @@
         </div>
     </div>
 </div-->
+<div class="row">
+        <!--div id="chooseDoctypeBtn" class="btn-group">
+            <button type="button" class="btn btn-xs btn-info" ng-model="doctype.state" ng-repeat="doctype in query.doctypes"
+                    btn-checkbox>{{doctype.name}}
+            </button>
+        </div-->
+        <div class="col-xs-6">
+            <select class="form-control" ng-model="query.chosenSubject"
+                            ng-options="key as value.forPrint for (key,value) in query.subjects">
+            </select>
+        </div>
+        <div class="col-xs-3">
+                <label for="startdate">From</label>
+                <input type="date" id="startdate" name="daterange"
+                value="2015-01-01"
+                min="2015-01-01" max="2018-12-31" />        
+        </div>
+        <div class="col-xs-3">
+                <label for="enddate">To</label>
+                <input type="date" id="start" name="daterange"
+                value="2018-07-22"
+                min="2015-01-01" max="2018-12-31" />        
+        </div>
+</div>
 <form novalidate class="form-search" ng-submit="restartSearch()">
     <div class="row" style="padding-bottom: 5px">
         <div class="col-md-12 alert alert-info" ng-show="query.multiSearch">
@@ -55,13 +79,9 @@
                             <div class="row">
                                 <div class="col-md-10">
                                     <table class="table table-condensed" style="background-color: #F0F0F0; border-left: 3px solid #31beb1;">
-                                        <tr >
-                                            <th >Keywords</th>
-                                            <td><span ng-repeat="keyword in doc._source.keywords">{{keyword[0]}}&#160;({{keyword[1].toFixed(2)}})&#160;&#160;</span></span></td>
-                                        </tr>
                                         <tr style="height:480px">
                                             <th >Preview&#160;(<a href="{{doc.pdfurl| trustAsResourceUrl}}" target="_blank">pdf</a>)</th>
-                                            <td ng-if="doc.showDetails"><iframe ng-src="{{doc.htmlurl}}" style="width: 400px; height: 300px; max-height: 300px; background:white; opacity:1; border: 1px solid black; -ms-zoom: 1.5;
+                                            <td ng-if="doc.showDetails"><iframe ng-src="{{doc.htmlurl}}" style="width: 500px; height: 300px; max-height: 300px; background:white; opacity:1; border: 1px solid black; -ms-zoom: 1.5;
                                                     -moz-transform: scale(1.5);
                                                     -moz-transform-origin: 0 0;
                                                     -o-transform: scale(1.5);

@@ -12,7 +12,7 @@ from pdfminer.pdfpage import PDFPage
 from elasticsearch import Elasticsearch
 es = Elasticsearch()
 
-INDEX = 'oregontitles'
+INDEX = 'oregonproperty'
 DOCTYPE = 'page'
 
 def convert(page, html=None):
@@ -33,7 +33,7 @@ def convert(page, html=None):
     output.close
     return pagetext
 
-pagePatterns = [b'(?:^.+\s{2,}([0-9IVXivx]+)\n+)', b'(?:^\s*([0-9IVXivx]+)\s+)',b'(?:\n{2,}([0-9IVXivx]+)\s*$)']
+pagePatterns = [b'(?:Page\s([0-9]+))',b'(?:\n{2,}([0-9IVXivx]+)\s*$)']
 pp = re.compile('|'.join(pagePatterns))
 def getPageNumber(text):
     try:

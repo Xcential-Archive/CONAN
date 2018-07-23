@@ -5,6 +5,7 @@ serviceModule.factory('serverConfig', ['$location', function ($location) {
         } else {
             this.host = location.protocol() + "://" + location.host() + ":" + location.port();
         }
+        this.host = location.protocol() + "://" + location.host() + ":" + location.port();
     }
 
     return new ServerConfig($location);

@@ -1,74 +1,834 @@
-<html>
+<!DOCTYPE html>
+<!-- Created by pdf2htmlEX (https://github.com/coolwanglu/pdf2htmlex) -->
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8"/>
+<meta name="generator" content="pdf2htmlEX"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <style type="text/css">
-.txt { white-space:nowrap; }
-#f0 { font-family:sans-serif; font-weight:normal; font-style:normal; }
-#f1 { font-family:sans-serif; font-weight:normal; font-style:normal; }
-#f2 { font-family:sans-serif; font-weight:normal; font-style:normal; }
-#f3 { font-family:serif; font-weight:normal; font-style:normal; }
-#f4 { font-family:serif; font-weight:normal; font-style:italic; }
-#f5 { font-family:serif; font-weight:bold; font-style:normal; }
-#f6 { font-family:sans-serif; font-weight:normal; font-style:normal; }
-#f7 { font-family:sans-serif; font-weight:normal; font-style:normal; }
-#f8 { font-family:sans-serif; font-weight:normal; font-style:normal; }
+/*! 
+ * Base CSS for pdf2htmlEX
+ * Copyright 2012,2013 Lu Wang <coolwanglu@gmail.com> 
+ * https://github.com/coolwanglu/pdf2htmlEX/blob/master/share/LICENSE
+ */#sidebar{position:absolute;top:0;left:0;bottom:0;width:250px;padding:0;margin:0;overflow:auto}#page-container{position:absolute;top:0;left:0;margin:0;padding:0;border:0}@media screen{#sidebar.opened+#page-container{left:250px}#page-container{bottom:0;right:0;overflow:auto}.loading-indicator{display:none}.loading-indicator.active{display:block;position:absolute;width:64px;height:64px;top:50%;left:50%;margin-top:-32px;margin-left:-32px}.loading-indicator img{position:absolute;top:0;left:0;bottom:0;right:0}}@media print{@page{margin:0}html{margin:0}body{margin:0;-webkit-print-color-adjust:exact}#sidebar{display:none}#page-container{width:auto;height:auto;overflow:visible;background-color:transparent}.d{display:none}}.pf{position:relative;background-color:white;overflow:hidden;margin:0;border:0}.pc{position:absolute;border:0;padding:0;margin:0;top:0;left:0;width:100%;height:100%;overflow:hidden;display:block;transform-origin:0 0;-ms-transform-origin:0 0;-webkit-transform-origin:0 0}.pc.opened{display:block}.bf{position:absolute;border:0;margin:0;top:0;bottom:0;width:100%;height:100%;-ms-user-select:none;-moz-user-select:none;-webkit-user-select:none;user-select:none}.bi{position:absolute;border:0;margin:0;-ms-user-select:none;-moz-user-select:none;-webkit-user-select:none;user-select:none}@media print{.pf{margin:0;box-shadow:none;page-break-after:always;page-break-inside:avoid}@-moz-document url-prefix(){.pf{overflow:visible;border:1px solid #fff}.pc{overflow:visible}}}.c{position:absolute;border:0;padding:0;margin:0;overflow:hidden;display:block}.t{position:absolute;white-space:pre;font-size:1px;transform-origin:0 100%;-ms-transform-origin:0 100%;-webkit-transform-origin:0 100%;unicode-bidi:bidi-override;-moz-font-feature-settings:"liga" 0}.t:after{content:''}.t:before{content:'';display:inline-block}.t span{position:relative;unicode-bidi:bidi-override}._{display:inline-block;color:transparent;z-index:-1}::selection{background:rgba(127,255,255,0.4)}::-moz-selection{background:rgba(127,255,255,0.4)}.pi{display:none}.d{position:absolute;transform-origin:0 100%;-ms-transform-origin:0 100%;-webkit-transform-origin:0 100%}.it{border:0;background-color:rgba(255,255,255,0.0)}.ir:hover{cursor:pointer}</style>
+<style type="text/css">
+/*! 
+ * Fancy styles for pdf2htmlEX
+ * Copyright 2012,2013 Lu Wang <coolwanglu@gmail.com> 
+ * https://github.com/coolwanglu/pdf2htmlEX/blob/master/share/LICENSE
+ */@keyframes fadein{from{opacity:0}to{opacity:1}}@-webkit-keyframes fadein{from{opacity:0}to{opacity:1}}@keyframes swing{0{transform:rotate(0)}10%{transform:rotate(0)}90%{transform:rotate(720deg)}100%{transform:rotate(720deg)}}@-webkit-keyframes swing{0{-webkit-transform:rotate(0)}10%{-webkit-transform:rotate(0)}90%{-webkit-transform:rotate(720deg)}100%{-webkit-transform:rotate(720deg)}}@media screen{#sidebar{background-color:#2f3236;background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjNDAzYzNmIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDBMNCA0Wk00IDBMMCA0WiIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2U9IiMxZTI5MmQiPjwvcGF0aD4KPC9zdmc+")}#outline{font-family:Georgia,Times,"Times New Roman",serif;font-size:13px;margin:2em 1em}#outline ul{padding:0}#outline li{list-style-type:none;margin:1em 0}#outline li>ul{margin-left:1em}#outline a,#outline a:visited,#outline a:hover,#outline a:active{line-height:1.2;color:#e8e8e8;text-overflow:ellipsis;white-space:nowrap;text-decoration:none;display:block;overflow:hidden;outline:0}#outline a:hover{color:#0cf}#page-container{background-color:#9e9e9e;background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjOWU5ZTllIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiM4ODgiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=");-webkit-transition:left 500ms;transition:left 500ms}.pf{margin:13px auto;box-shadow:1px 1px 3px 1px #333;border-collapse:separate}.pc.opened{-webkit-animation:fadein 100ms;animation:fadein 100ms}.loading-indicator.active{-webkit-animation:swing 1.5s ease-in-out .01s infinite alternate none;animation:swing 1.5s ease-in-out .01s infinite alternate none}.checked{background:no-repeat url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3goQDSYgDiGofgAAAslJREFUOMvtlM9LFGEYx7/vvOPM6ywuuyPFihWFBUsdNnA6KLIh+QPx4KWExULdHQ/9A9EfUodYmATDYg/iRewQzklFWxcEBcGgEplDkDtI6sw4PzrIbrOuedBb9MALD7zv+3m+z4/3Bf7bZS2bzQIAcrmcMDExcTeXy10DAFVVAQDksgFUVZ1ljD3yfd+0LOuFpmnvVVW9GHhkZAQcxwkNDQ2FSCQyRMgJxnVdy7KstKZpn7nwha6urqqfTqfPBAJAuVymlNLXoigOhfd5nmeiKL5TVTV+lmIKwAOA7u5u6Lped2BsbOwjY6yf4zgQQkAIAcedaPR9H67r3uYBQFEUFItFtLe332lpaVkUBOHK3t5eRtf1DwAwODiIubk5DA8PM8bYW1EU+wEgCIJqsCAIQAiB7/u253k2BQDDMJBKpa4mEon5eDx+UxAESJL0uK2t7XosFlvSdf0QAEmlUnlRFJ9Waho2Qghc1/U9z3uWz+eX+Wr+lL6SZfleEAQIggA8z6OpqSknimIvYyybSCReMsZ6TislhCAIAti2Dc/zejVNWwCAavN8339j27YbTg0AGGM3WltbP4WhlRWq6Q/btrs1TVsYHx+vNgqKoqBUKn2NRqPFxsbGJzzP05puUlpt0ukyOI6z7zjOwNTU1OLo6CgmJyf/gA3DgKIoWF1d/cIY24/FYgOU0pp0z/Ityzo8Pj5OTk9PbwHA+vp6zWghDC+VSiuRSOQgGo32UErJ38CO42wdHR09LBQK3zKZDDY2NupmFmF4R0cHVlZWlmRZ/iVJUn9FeWWcCCE4ODjYtG27Z2Zm5juAOmgdGAB2d3cBADs7O8uSJN2SZfl+WKlpmpumaT6Yn58vn/fs6XmbhmHMNjc3tzDGFI7jYJrm5vb29sDa2trPC/9aiqJUy5pOp4f6+vqeJ5PJBAB0dnZe/t8NBajx/z37Df5OGX8d13xzAAAAAElFTkSuQmCC)}}</style>
+<style type="text/css">
+.ff0{font-family:sans-serif;visibility:hidden;}
+@font-face{font-family:ff1;src:url('data:application/font-woff;base64,d09GRgABAAAAABfgAA0AAAAAI9wAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAABMAAAABoAAAAczyOuWUdERUYAAAFMAAAAHQAAACAAcAAET1MvMgAAAWwAAABEAAAAVlbZAmljbWFwAAABsAAAAMYAAAGKk5PHN2dhc3AAAAJ4AAAACAAAAAj//wADZ2x5ZgAAAoAAABFZAAAaQGPzX/5oZWFkAAAT3AAAADEAAAA2EY2QG2hoZWEAABQQAAAAIAAAACQGXAMEaG10eAAAFDAAAADDAAABDJzBBX5sb2NhAAAU9AAAAIgAAACIy5bSPm1heHAAABV8AAAAHgAAACAAiABJbmFtZQAAFZwAAAHIAAAD3rN8DgFwb3N0AAAXZAAAAHoAAACoBosHfXicY2BgYGQAgms3fCNAdI3qhgYYDQBDPQX3AAB4nGNgZGBg4ANiCQYQYGJgBEInIGYB8xgAByAAdQAAAHicY2BkymTaw8DKwMDUBaQZGHogNOMDBkNGJqAoAwczAxg0AAUZkEBAmmsKgwKDgoIk08P/xkCVDxnOMkDVAAD2dQuReJxjYGBgZoBgGQZGBhBoAfIYwXwWhgwgLcYgABRhY1Bg0GOwZnBn8GIIZ4hkyGKoUpD8/x8or8Cgw2DA4MjgyeADFE9kyAGJ/3/8/8b/6/8v/b/4/8L/8/9P/D/+QBNqPhbAyMYAl2RkAhJM6AogToQBFlY2BnYOTi5uHl4+fgFBIbCgsIiomLiEJIOUNIOMrJy8gqKSsoqqmjqDBlSTppa2jq6evoGhEYOxiamZuYWllbWNrZ29gyMuZ1EOnIhXCgCqlSUJAAAAAAAB//8AAnicpVl7dBRllq+vOkkn6fS7qyvppJ+V7up3d1V1VyfpTifkHUggJCEhEJ6BGNAAgoo8fAECw0McXXVV1oDrk+EgI4676u76POMuirM7M+twXFZdlpmzx1Fn3HE96tlU9n5V3XkA7v6xB08/Cvv+7v3de3/fvR8EIvxTHcSXxAuEmSBoNouSCcZTxHh8yYQo8FbK0lIVzJaQepUzXOuN1/y137bAVkrWOEKpNn4fQRCICBJnEIOihIogUkmBCn535u678fPw1FfEZ2BXTRBiQuStliJPuGZhTc3CAH6pgd+SROXUVyRDvgnYDEGYKYtDxWdV9SgRRR4dmciSvIO06EhPFL1boq2gq+kKbYm1OlNtPc0tGhoYWsQpb2jXUOtq0V5cbBdXtw5t2R0I7P7s7LH+SKT/mPIm+9kHL78HLIoghKTAi0ljwhdCySxKCUaLNY2opU0sRbHtg7fG3RTbIFoc6LTDIpIO7+Sz8C7bAI5IM9gIYhtiSkwmfMAW+E1SlmnSHAi+qIvUFIA0IEFl7pjYUlcXyVa6KgVvWDw8Uj/eM6/lwPCfKulCXcLqu+HZW2+obQpRelOpn/FEmmq7bvEta0huCw12kBZ7u/Q9IWPTwBXGbgSec7kBZCuORElZMgEP5a85p9Asp+D/VlPwoiPhCc2z1cm4GOIyQ2VxLcOWCAZXqDbmCtHlYR8r7Bzbcufp1yvrxjvXHnucFUKM31dmtA20PljkZrSti+qzFfoSykV7w0l/w8jaBXu9pO4ppqneOyDnFHOEc2olbAThdSeRUEQZBYqhZJLdMvUaJBgRI/0R3dSqHh2l2ErphWqWIi/84mw3eqc3Lb3R0gGU4xQclaYQkuN3QfxWsFsPlaLOxT8rOh3KkwHRq+EBJiQlpqw0PE1lSYEHBnSI8Tyhq+/dcN+Dd6+8NxlgOJdLdHSmm8R4hvRXVxg0XIJr6U5ozKVkaal1dH4HGdhXfceabQeW9QfEKONk9EUm+/jqjsVsaUHYV6nd/Z66oKAYFZBmHc01zqlpJ8GCp4k5nsqZUtMzz1IWK3bZU3nm0NL1fJiNVARamhDJrxvYtH/b3cdejHXFTqHga5e66iJczG3zq20nj5IdOxavPXzW07toUe9JpTYiOUwHQVQiB5JDptQ6pQCSiQaEsQBajyKMcZG1ObF/dVtNgI8Pj9/n6bGsc7sorQY9ivxITRbq2cd2P7+hLT22+OmLKpW9KQmdjWOqBvsa6NM4AOLystJYLHwmObAGNJ0IKHzwoCiGZmUEufjOrhG7K5v+8t6OJLnt/vVjO2rD8+Yj9NkKe3V7OtNbS94vipG0xdBczTdMrhleUtdnJFPbRzYNtiYXGsnKpQvXPu40tYbTbQ11kdg1PM/qCEBMsbMrA382W3hww1MUvZZjzPyjp4Do7ddQ/CMgHr148iQwTci5lTUN/RY0TU8QppyqFc1RN+U/tEr+IOWlDn4r6yz81kxUXl9pyZyduYr7lmxvru6i0zN2p74gCFUp+W9EObbLgCqZBVwCcqclEzHEYE4olcCaFwtfLCCmTJ6o9KQzVMJOOtZFzo+I6tvJ8OTjIRsSRbuOHm11tojI9h22rZJ7+d/JXxLFRDUBpCNsEWsLmiWg7nzSVZhq1UwXokjTxKE6u/S7MNbVMHp2x9GR8VDPgsieI8+VR4eGOrLoyIN3VKYnX4VGJ0lo+OG+tsVGsoAOtkX7xtHAlw5L84KWhVDfLOT6VxAjKApSRxF2wYDzTOOGVgikUwL5jmDfsmRs2fml201p+xOHnnnzoxPj82uD6K3CGw8+c0q6sH1Ed+Ce90+fuFgjEnmtUtkgPgM+f5ARu54lk4koiGTRtTFCRA6ea29wuRo6Ba5yOrDjL77y1vPkaqnMTVU07F6+6q7GCtvknfmg3n7i3N/lz453ACs89/xxm5moCuDsCAckwDcUQli85fhUZgWDnFDzRm9tb6a22pxpL04U1JA9jWXaSHJs3M1r8lDS93WdIl0Veru7WTrZ2v9bR7lmdGuB9M302fUK4PsJIoD+bwdArNHT0qb/DZ5iMz+A/LXDImNC3lQ85M2L88aCAhkNSnFgXEoGZWZ6FafwIl8+76H3Xuhv0Vc0olE7S3HCCjmRuxbWhdCbqqaz0rPSeyNrnGZ8PPzXyAhOp8gDlh0wJiA++ip+MQylnPD2XML2KO955+F9UlKOeLBTBLW2B+z44Mv0r6/WE8aTq3MjLnRCtvjwsS13zUtxYogpqSo2NYf6F1IseRxblw5uPTa+omawLuSvVVsqYytXoD3AkJKT1wHL9gM+yxnJ1wA6yLMUs3BsE50om+W6ZIjQ4zdJX2HfS6Ge38vX2KwMC+bZNChnsJFRwR/lSWkqQbEBNO9x8s9QZwyjxaRdgEr+K3+ZDIk6MdWOXsZpno9ezrOFXfBNbiX3S+m21hx3hVPfqDKAD7kwJ90I4FkIBg4CI4MwFFYlED6jrxCRaG+wBblagvOkMBlskT5tCXqBLSmBKjp4lSiq+I7J35CCdCj/DZ0T5Z7FNWWDmiqUNRjqycAQBpwZAyTmi5fOnZP2f3Ri4qOPJk6QZ8G9+6QK1HjxovTGRfhtORj4BPyrAD0jUrN62+1hZ80nZmp6jLobE//iwaPSq0wLxfLS7cDKi7Vr+9v7ec+YnIIb139AfiDzQTqnWgd6W82KdrJTzSo/+FkG02IdTEI4m/mJ0Tt9Vsp9nhRyOpaS31MWWsjCc/mENTAeFKoRY1QB741y0n/j2EYWUBxlLheLlnZ3LUHF8ZKn//HnFKnuF9ODRo3x3Ev7WFFncHZka/7qxMWLJ1adjXW2R5jegSWdejVZ8PFj492J+sZa+p4gascaCHzGgJNSohZSOBP5dTUe0YowCXIXsFEyJxUUirCr1rV2NDimVfGd/bfvWNndYtEYIfEF3HBXx1KEKpIiVBpPDr2b7WlNWSd35gt5rLdruIg0D62q8YSSywcXD/T1Ob6e7kkBenIncAlzN60SFM4SvhiKorxwYNmSp14nys29rDpdzHnuW5EeEGpH79n95zevXiSGtLxzz6DYv3n3zi1HduzqbyhF9tVHamvCnMZScWfvpttSnPTtsjuTfDdts92ycs3B5qyMb4C6eQs4cs/qUwZWFDVjzstnrreO17CUrtyX9ZcXcgbyAQNXWO7P+sp1FFuDQ6Uofait04sM0h+9nW0hPTX5+/xuoYM81AJGtdw7uXbNYeEukr/rVIxLBtfJkvNCz0ioBTmycbfYtTgqXZgWnFtOrlqBqjsTpCg2tUpXMivSXv0X6IgsywSa+gL6tFTRHZWMRVnoSjQtzEVqkIYoMqMNvKf4qWNqwWVAgSHxk96vLR4MQJWWS2vQNouhihHFoj2Tl8llfDmOQQ12PwC70XwMYBfEh40iNheS/B2AWFgVdQjjMDKWGgm0F0aR3uoyqxv5tVVm9U3kstLl33vjpp+230ne23leb8PYtmJauh+pxn1GiK1Ur6WkR1HE6UgUiGJhKj35T+i4tI5cE6fkOL+GvH2saLkq74AT4S5kZF3So1ldX4/AjzI0anVazXtXm1chbzLD7qPYpLQZhPcNqwvDl2o1jl+fYfQJUVQLTZc/VITwPBIYizzjfUUOwYwXJBK4l3D68N4h90ruCEnl17PZ+4sqmR+WyeKK4vISfZPfW186//b23qOvhDiPryLsc8Z2bLz82PI2xhkQUff5Rr3BIbCO1rratgGnkIxQ2iKXwe5lvakO6d0mEx93eecpM04B+DQGvUMTHpyVlFHRllyPMEotm2cWyYLPSetAbP1th7dvrm+OainnB1wywY8mePJpTiOd84WO3LDxkb6+tk3ofScl1a9ZtWHw9Q25/awMYodJykuD7ahqZhvObz+5yAUeXYonftK4tq5aO7FFXN7C+T2cy00L87KNN7xgOMMk2rLOzYfphjgbCzrKg+oy3coVQzcq8WCcfRCPRtZwZX9S7guwEiglnFKaUZ1kAPp9biNnis2PmU7vXTdYRzmD31JOx+/I6LaVn3WPjXXzC1OphU99+EjzL5wUp5k8hl+7ls9gOSAmE1GFd1nZ9dzQiYd1yjutlqRDOrOgbbgmwmwb3DoxcWWXdOZhiy7i57krVMeym8098w9/fPjQ1rDeks2ulPtdAy8XII4APomYpJCcsyrm1gMYyihm1qk9snTp7mXNi8PVVVGDweKovusuU4CR/sYYMA2j5oxh84HGKBNlq8yVWpW2qWlxRvpbu47jdPg8ckwJ5GaSJjjQ+RbQ0fzSlkrmVXQGny1SwyYSQnME1ZzbVVWYhWQiBAueo40nN3Yms+kDoz1iptURdDloZ4GRzm4fFW0O78/rOx/e/93P/PP9jyUzTY8sflJnucnPkaS5yysUkIbuePcKRw/jsHk95Sp7+P5Bs9ZJFpALuL4lZJnY0CDeOvllJTMvqq7CfBkhIQ8DX1fNz1DP2G87mt3Ickpyj2ggBxL+OSls6xoyBYzSrzUBk4+J1JsCGk5nJymccOn55X0Dn8pc2T8M8D0dj8JnpQbwztELuKarp7RckeXXNlcOByD+ILQJQhuYQnrZ+D1gjBzDzwRlZzs1JSA92FTuCLAlEPa5dxn5UyZ/d6b7tiqY5iszvSF3lU+ns1VWUs6QjIMmAOK29hszXo0YdwVZ2lxRSpYEefQTJ/UPeVCZP9Qpx3G9KOgZ76dJmdylkCD/VnUa+qB1empKUTLttKwlP0z+Dz0aAaz/IJM3xBaYK/tZnBeT9InGpXe7nCm9SyP956zPn8rVLTPZ2RcKs/HpTP2G92ebfnrNZ4KYrhfw+ep6of5/9aI4svh65aLoRbN8P6CdufVUZlTXxJUTJ65o14+O7v74MGgBelvahB6A3xihL2+F37iIEHTltZ7mOjJ3f6aaueSadpTfsP62PSOhHitpCtiXJvgEzwduvoB9vYR97ejFiu11PgM+olcG1qzvXbJa9lUg7wTcEqzYOR0Fq4UpQW2czQ2WUB8uTKyjQmotKpwX02Ne3rIHTCS3ceUde9c9KCvp2Fp37zvSJoWWZ1oOfPhIPg8FyrmQuk5giRSrm30K48r4mOS2xhtjHtZvJRsypkBAenmmBg4+kOA8XCyjJ41PPjYr3/Gpr9AlwIGzPqVmWMGqXH9Mr5Y045s7IPr2+f0F0frbhvrnP7SlrynlCxZEm4b98bofpRrG1/l6zObThxpCRr1jV1e/m378FpfDpWN084UFK60YjwK8h8i/xPummZGvkSlFq+WB3oLbebi9faEhs2+fkXa5xef7M2hCLF6z/u8z0hWXq40/37tC5gdq5jj6F8i/ogS5grz6FJOL1Ph5W7we51w+wbLbTlBOufsvrOpuv0+Wmofwa9/a1153UmC7bOobchBsVyjz2PT045sZv/DIYxOLbh4oYaKXvX7bj5e8aqDRKY4rsJRq//BLa5nFUMRxRf609DN0l9ukcG2AOW8D2A0qdnNjFYx5eKzy5FEgBAH+DlA0CAMZkNFuKRyeX15aYUdUuni4Td9Y9omTNZ/sunFb99NlDgxbptNoLz2Xthk5rlxDXXyGoXiO84Wkv0DF0rdor92C8cugpnBcvLznNqAcMnMVtB6vK3Ru34VaUIOfQGhZKL77aHmVFflLGE06bA+bvq7lth430y7pXZ3BpKlPWoMmLnLrc3YTxxk1uraAzWzjuNjG16xakuO0pRpdR8KqdyraWAZ9hH0Jz8zts53ALM/cUuFreMhwSqa9UkcbNRs7LI3ayz5P+ang2iahQXAxwRJ1rfCrEovCRpn1n5+MmmIcV+hKSD9e3p/2uWM+B6Uv3ImOGzWAj+8p/gT4RswF3oHUTMpNKVua2ocsK2OCKa5BZ6Uvt/gypmgph3Zk2l/ipANd8+R7KSvaSVyCcwHWVvN1biX5ObeRaOfcfwD6H31sd+MAAAB4nGNgZACD/0o8R+L5bb4ycDO/APGvV6tNhNH/V/03Zj7H9JCBkYGDgQkkCgBjYA00AAAAeJxjYGRgYHr435iBgfnq/1X/dzCfYwCKoABnALCUB2R4nC2NzQnCQBCF3+yqgSjiIv4GNScVURS8CxbgyQYCduDNAoT0kA4CduDNDgIpw4MgeIxvl134eDNv3szKDO7JibCWPpasV9S1OiAiZ9IlA6+x9zdeI5u1e+pXvXWILlnoI7M/UrA/YiFPTFSKhutLhPTq1mdmaFVvmc2w57zDvu1ulQhUUX3VhbdT1NSaf2fu/1juaNKfqgeMXDGWpMolgdEvGOtxZrOGe7EKmPliJzl6ftbSN3SsOkaY44P+H+eyKrgAAAAAAAAAAAAAAAAgACwAPgB0AJYA1AEoAVQBqAHiAhICXAKWArQC4AMOA1IDfgO0A/QELgRkBIgEvgTmBSYFWAV2BawGAAZSBpIGxAb6ByYHbgemB/AIJAhYCI4IvAj0CVQJkAm6CfQKEgpsCqYKwAr8CzALZAucC8AL7gwaDFoMoAzgDQANIHicY2BkYGBwZnBjYGYAASYgZmQAiTmA+QwAEGUA0gAAeJy1ksFq20AQhv+VndAS6KXQkw97KSQkNpZCkJSbY1CSQ4OxIcdCLC+2iaI1KyVBT9BXyAPk3EvpY/QBCqXP0n/XW9enHgKR0Oy3M7O7/8wKwDt8hcD6KfHbs0BHfPEcoC3+5rSQBB89t9EJnjzvYC/44XkXndZ7Zor2W85+uVWWBRLxyXOAN+LZcwsr8c1zm/t/9ryDD8F3z7v0/8QQGis0MFhijgVqSOwjxwHHECkSnOBow/EWJxtOaf9xtMXxFm/np6QBZjx7CkWeUEHFsxXuOEpcsm85o4barL1xsRl6jNmVBV+J8UZz5WaKo2L2g8/FUK8as5wvarmfH8gwTU6OrI2dTaxNQ2cjZ50/XftTOZjpqZKTpqrVXSUvy1yblTY3tZr1pBwUhRzbnSs5VpUyD/QCGUbuPccFDnFFGY9ssGIxNe4prGGhOQUXLPsWXZyxuIJSkY1Go/OLwyv1OFRlfW+aSb4oprfdM10wuklbTzNO7Y6Za83cNTBiuX2Op/xeqmK9OsIxfTG/iDuGvDZkuqwzbeZKRr2+PJX/U8twdNyNu1E/TF6tIdfumitev+2E/als9bhWplrqUoa9/msd/Qdt/LK2eJxtzFtSgQEAgNGDBcgkRDwRGoZcCuONcp+IImk1Lcry+MezM/O9fsIuTv8arhkEhYRFRN2IuRV3JyEp5V5axoOsnLyCR0UlZU8qqmrqnoNrU0vbi1cdXT19Q2/ejYxNTM3MLXxYWvm0tvHl29bOj71fB3+OZ7yPEAgAAA==')format("woff");}.ff1{font-family:ff1;line-height:0.942000;font-style:normal;font-weight:normal;visibility:visible;}
+@font-face{font-family:ff2;src:url('data:application/font-woff;base64,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')format("woff");}.ff2{font-family:ff2;line-height:1.018000;font-style:normal;font-weight:normal;visibility:visible;}
+.m0{transform:matrix(0.250000,0.000000,0.000000,0.250000,0,0);-ms-transform:matrix(0.250000,0.000000,0.000000,0.250000,0,0);-webkit-transform:matrix(0.250000,0.000000,0.000000,0.250000,0,0);}
+.v0{vertical-align:0.000000px;}
+.ls49{letter-spacing:-2.192000px;}
+.ls1{letter-spacing:-1.788000px;}
+.ls47{letter-spacing:-1.724800px;}
+.ls6b{letter-spacing:-1.686400px;}
+.ls40{letter-spacing:-1.588000px;}
+.ls57{letter-spacing:-1.536000px;}
+.ls86{letter-spacing:-1.496000px;}
+.ls3d{letter-spacing:-1.460000px;}
+.ls4a{letter-spacing:-1.459200px;}
+.ls32{letter-spacing:-1.236000px;}
+.ls2f{letter-spacing:-1.196800px;}
+.ls83{letter-spacing:-1.168000px;}
+.ls48{letter-spacing:-1.136000px;}
+.lsc{letter-spacing:-1.040000px;}
+.ls31{letter-spacing:-0.956000px;}
+.ls4d{letter-spacing:-0.924000px;}
+.ls2{letter-spacing:-0.912000px;}
+.ls6c{letter-spacing:-0.884000px;}
+.ls4{letter-spacing:-0.824000px;}
+.ls30{letter-spacing:-0.812000px;}
+.ls7c{letter-spacing:-0.760000px;}
+.ls3b{letter-spacing:-0.736000px;}
+.ls43{letter-spacing:-0.704000px;}
+.ls82{letter-spacing:-0.692000px;}
+.ls7d{letter-spacing:-0.632000px;}
+.ls22{letter-spacing:-0.612000px;}
+.ls4e{letter-spacing:-0.572000px;}
+.ls3e{letter-spacing:-0.568000px;}
+.ls46{letter-spacing:-0.564000px;}
+.ls33{letter-spacing:-0.508000px;}
+.lsa{letter-spacing:-0.480000px;}
+.ls3{letter-spacing:-0.476000px;}
+.ls70{letter-spacing:-0.472000px;}
+.ls36{letter-spacing:-0.412000px;}
+.ls5{letter-spacing:-0.400000px;}
+.ls6d{letter-spacing:-0.392000px;}
+.ls9{letter-spacing:-0.352000px;}
+.ls41{letter-spacing:-0.348000px;}
+.ls3a{letter-spacing:-0.344000px;}
+.ls11{letter-spacing:-0.332000px;}
+.ls59{letter-spacing:-0.328000px;}
+.ls25{letter-spacing:-0.324000px;}
+.ls4c{letter-spacing:-0.304000px;}
+.ls69{letter-spacing:-0.288000px;}
+.ls6e{letter-spacing:-0.284000px;}
+.ls62{letter-spacing:-0.280000px;}
+.ls84{letter-spacing:-0.256000px;}
+.ls1f{letter-spacing:-0.252000px;}
+.ls12{letter-spacing:-0.248000px;}
+.ls1a{letter-spacing:-0.236000px;}
+.ls55{letter-spacing:-0.232000px;}
+.lse{letter-spacing:-0.216000px;}
+.ls56{letter-spacing:-0.192000px;}
+.ls2a{letter-spacing:-0.188000px;}
+.ls44{letter-spacing:-0.184000px;}
+.ls6f{letter-spacing:-0.176000px;}
+.ls42{letter-spacing:-0.172000px;}
+.ls8{letter-spacing:-0.152000px;}
+.ls64{letter-spacing:-0.136000px;}
+.lsb{letter-spacing:-0.132000px;}
+.lsf{letter-spacing:-0.124000px;}
+.ls37{letter-spacing:-0.116000px;}
+.ls5e{letter-spacing:-0.112000px;}
+.ls24{letter-spacing:-0.104000px;}
+.ls85{letter-spacing:-0.100000px;}
+.ls23{letter-spacing:-0.088000px;}
+.ls7e{letter-spacing:-0.080000px;}
+.ls7f{letter-spacing:-0.072000px;}
+.ls77{letter-spacing:-0.064000px;}
+.ls65{letter-spacing:-0.060000px;}
+.ls1b{letter-spacing:-0.056000px;}
+.ls1c{letter-spacing:-0.052000px;}
+.ls7{letter-spacing:-0.048000px;}
+.ls28{letter-spacing:-0.036000px;}
+.ls5c{letter-spacing:-0.032000px;}
+.ls80{letter-spacing:-0.028000px;}
+.ls3c{letter-spacing:-0.024000px;}
+.ls51{letter-spacing:-0.020000px;}
+.ls3f{letter-spacing:-0.016000px;}
+.ls74{letter-spacing:-0.012000px;}
+.ls18{letter-spacing:-0.008000px;}
+.ls16{letter-spacing:0.000000px;}
+.ls72{letter-spacing:0.004000px;}
+.ls75{letter-spacing:0.008000px;}
+.ls79{letter-spacing:0.012000px;}
+.ls68{letter-spacing:0.024000px;}
+.ls71{letter-spacing:0.036000px;}
+.ls27{letter-spacing:0.044000px;}
+.ls67{letter-spacing:0.052000px;}
+.ls2b{letter-spacing:0.056000px;}
+.ls34{letter-spacing:0.060000px;}
+.ls19{letter-spacing:0.064000px;}
+.ls14{letter-spacing:0.068000px;}
+.ls4f{letter-spacing:0.072000px;}
+.ls2e{letter-spacing:0.076000px;}
+.ls73{letter-spacing:0.088000px;}
+.ls4b{letter-spacing:0.092000px;}
+.ls1d{letter-spacing:0.096000px;}
+.ls35{letter-spacing:0.100000px;}
+.ls17{letter-spacing:0.104000px;}
+.ls53{letter-spacing:0.108000px;}
+.ls5f{letter-spacing:0.112000px;}
+.ls52{letter-spacing:0.116000px;}
+.ls15{letter-spacing:0.124000px;}
+.ls7a{letter-spacing:0.128000px;}
+.ls38{letter-spacing:0.132000px;}
+.ls0{letter-spacing:0.136000px;}
+.ls2d{letter-spacing:0.140000px;}
+.ls1e{letter-spacing:0.144000px;}
+.ls66{letter-spacing:0.148000px;}
+.ls13{letter-spacing:0.152000px;}
+.ls20{letter-spacing:0.176000px;}
+.ls5a{letter-spacing:0.184000px;}
+.ls39{letter-spacing:0.188000px;}
+.ls26{letter-spacing:0.192000px;}
+.ls6a{letter-spacing:0.208000px;}
+.ls60{letter-spacing:0.220000px;}
+.ls76{letter-spacing:0.232000px;}
+.ls63{letter-spacing:0.248000px;}
+.ls81{letter-spacing:0.252000px;}
+.ls61{letter-spacing:0.256000px;}
+.ls54{letter-spacing:0.260000px;}
+.ls10{letter-spacing:0.268000px;}
+.ls21{letter-spacing:0.272000px;}
+.ls50{letter-spacing:0.280000px;}
+.ls78{letter-spacing:0.288000px;}
+.ls29{letter-spacing:0.308000px;}
+.ls45{letter-spacing:0.312000px;}
+.ls5d{letter-spacing:0.328000px;}
+.ls6{letter-spacing:0.344000px;}
+.ls58{letter-spacing:0.356000px;}
+.lsd{letter-spacing:0.400000px;}
+.ls2c{letter-spacing:0.412000px;}
+.ls5b{letter-spacing:0.648000px;}
+.ls7b{letter-spacing:0.960000px;}
+.sc_{text-shadow:none;}
+.sc0{text-shadow:-0.015em 0 transparent,0 0.015em transparent,0.015em 0 transparent,0 -0.015em  transparent;}
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.sc_{-webkit-text-stroke:0px transparent;}
+.sc0{-webkit-text-stroke:0.015em transparent;text-shadow:none;}
+}
+.ws1{word-spacing:0.000000px;}
+.ws40{word-spacing:3.280000px;}
+.wsf{word-spacing:4.396000px;}
+.ws1e{word-spacing:4.400000px;}
+.ws51{word-spacing:4.476000px;}
+.ws10{word-spacing:4.480000px;}
+.ws2c{word-spacing:4.512000px;}
+.ws0{word-spacing:5.320000px;}
+.ws20{word-spacing:5.504000px;}
+.ws1d{word-spacing:5.680000px;}
+.ws31{word-spacing:5.684000px;}
+.ws2a{word-spacing:5.748000px;}
+.ws42{word-spacing:6.520000px;}
+.ws12{word-spacing:6.844000px;}
+.ws48{word-spacing:6.864000px;}
+.ws15{word-spacing:6.880000px;}
+.ws2b{word-spacing:6.884000px;}
+.ws2e{word-spacing:6.900000px;}
+.ws4c{word-spacing:6.964000px;}
+.ws44{word-spacing:7.720000px;}
+.ws43{word-spacing:7.828000px;}
+.ws19{word-spacing:8.040000px;}
+.ws37{word-spacing:8.068000px;}
+.ws46{word-spacing:8.072000px;}
+.ws23{word-spacing:8.080000px;}
+.ws36{word-spacing:8.100000px;}
+.ws4a{word-spacing:8.136000px;}
+.ws52{word-spacing:9.236000px;}
+.ws35{word-spacing:9.256000px;}
+.ws13{word-spacing:9.280000px;}
+.ws6{word-spacing:9.284000px;}
+.ws14{word-spacing:9.352000px;}
+.ws4e{word-spacing:9.396000px;}
+.ws24{word-spacing:9.404000px;}
+.ws50{word-spacing:10.372000px;}
+.ws5{word-spacing:10.480000px;}
+.ws3e{word-spacing:10.484000px;}
+.ws27{word-spacing:10.556000px;}
+.wsc{word-spacing:10.572000px;}
+.ws25{word-spacing:10.576000px;}
+.ws3b{word-spacing:11.604000px;}
+.ws3c{word-spacing:11.616000px;}
+.ws1b{word-spacing:11.680000px;}
+.ws4f{word-spacing:12.520000px;}
+.ws4b{word-spacing:12.876000px;}
+.wsd{word-spacing:12.880000px;}
+.ws3d{word-spacing:14.052000px;}
+.ws4d{word-spacing:14.056000px;}
+.ws32{word-spacing:14.064000px;}
+.wse{word-spacing:14.080000px;}
+.ws38{word-spacing:14.112000px;}
+.ws33{word-spacing:15.196000px;}
+.ws1a{word-spacing:15.280000px;}
+.ws3a{word-spacing:15.284000px;}
+.ws30{word-spacing:15.324000px;}
+.ws34{word-spacing:16.476000px;}
+.ws11{word-spacing:16.480000px;}
+.ws45{word-spacing:16.584000px;}
+.ws2d{word-spacing:17.296000px;}
+.ws28{word-spacing:17.620000px;}
+.ws9{word-spacing:17.680000px;}
+.ws29{word-spacing:17.856000px;}
+.ws22{word-spacing:18.456000px;}
+.ws4{word-spacing:18.544000px;}
+.ws47{word-spacing:18.940000px;}
+.ws8{word-spacing:18.964000px;}
+.ws21{word-spacing:19.720000px;}
+.ws18{word-spacing:20.080000px;}
+.ws1c{word-spacing:21.276000px;}
+.ws7{word-spacing:21.296000px;}
+.ws1f{word-spacing:21.392000px;}
+.ws2f{word-spacing:22.436000px;}
+.ws26{word-spacing:23.680000px;}
+.wsa{word-spacing:24.880000px;}
+.ws3{word-spacing:25.720000px;}
+.wsb{word-spacing:26.080000px;}
+.ws49{word-spacing:26.108000px;}
+.ws2{word-spacing:26.920000px;}
+.ws39{word-spacing:29.680000px;}
+.ws16{word-spacing:30.880000px;}
+.ws3f{word-spacing:32.048000px;}
+.ws41{word-spacing:32.920000px;}
+.ws17{word-spacing:33.296000px;}
+._c{margin-left:-2.569600px;}
+._2{margin-left:-1.560000px;}
+._1{width:1.112000px;}
+._7{width:2.224000px;}
+._4{width:4.808000px;}
+._3{width:6.164000px;}
+._5{width:7.408000px;}
+._b{width:12.000000px;}
+._9{width:14.396000px;}
+._d{width:15.880000px;}
+._8{width:17.556000px;}
+._a{width:23.984000px;}
+._6{width:28.804000px;}
+._0{width:129.544000px;}
+._f{width:549.440000px;}
+._e{width:686.408000px;}
+.fc0{color:rgb(0,0,0);}
+.fs1{font-size:32.000000px;}
+.fs0{font-size:40.000000px;}
+.y78{bottom:48.300000px;}
+.y3d{bottom:70.200000px;}
+.y77{bottom:80.100000px;}
+.y3c{bottom:80.400000px;}
+.y76{bottom:90.000000px;}
+.y3b{bottom:94.500000px;}
+.y75{bottom:99.900000px;}
+.y3a{bottom:104.700000px;}
+.y74{bottom:113.100000px;}
+.y39{bottom:114.900000px;}
+.y73{bottom:123.000000px;}
+.y38{bottom:125.100000px;}
+.y72{bottom:132.900000px;}
+.y37{bottom:135.300000px;}
+.y71{bottom:142.800000px;}
+.y36{bottom:149.400000px;}
+.y70{bottom:152.700000px;}
+.y35{bottom:159.600000px;}
+.y6f{bottom:162.600000px;}
+.y6e{bottom:172.500000px;}
+.y34{bottom:174.900000px;}
+.y33{bottom:185.100000px;}
+.y6d{bottom:186.900000px;}
+.y6c{bottom:196.800000px;}
+.y6b{bottom:206.700000px;}
+.y32{bottom:210.000000px;}
+.y6a{bottom:216.600000px;}
+.y31{bottom:220.200000px;}
+.y69{bottom:226.500000px;}
+.y30{bottom:230.400000px;}
+.y68{bottom:236.400000px;}
+.y2f{bottom:240.600000px;}
+.y67{bottom:246.300000px;}
+.y2e{bottom:250.800000px;}
+.y66{bottom:256.200000px;}
+.y2d{bottom:261.000000px;}
+.y65{bottom:266.100000px;}
+.y2c{bottom:271.200000px;}
+.y64{bottom:276.000000px;}
+.y2b{bottom:281.400000px;}
+.y63{bottom:285.900000px;}
+.y2a{bottom:295.500000px;}
+.y62{bottom:299.100000px;}
+.y29{bottom:305.700000px;}
+.y61{bottom:309.000000px;}
+.y28{bottom:315.900000px;}
+.y60{bottom:318.900000px;}
+.y27{bottom:326.100000px;}
+.y5f{bottom:328.800000px;}
+.y5e{bottom:338.700000px;}
+.y26{bottom:340.200000px;}
+.y5d{bottom:348.600000px;}
+.y25{bottom:350.400000px;}
+.y5c{bottom:358.500000px;}
+.y24{bottom:360.300000px;}
+.y5b{bottom:368.400000px;}
+.y23{bottom:370.200000px;}
+.y5a{bottom:378.300000px;}
+.y22{bottom:380.100000px;}
+.y59{bottom:388.200000px;}
+.y21{bottom:390.000000px;}
+.y58{bottom:398.100000px;}
+.y20{bottom:399.900000px;}
+.y57{bottom:408.000000px;}
+.y1f{bottom:409.800000px;}
+.y56{bottom:417.900000px;}
+.y1e{bottom:424.800000px;}
+.y55{bottom:432.000000px;}
+.y1d{bottom:434.700000px;}
+.y54{bottom:441.900000px;}
+.y1c{bottom:444.600000px;}
+.y53{bottom:451.800000px;}
+.y1b{bottom:454.500000px;}
+.y52{bottom:461.700000px;}
+.y1a{bottom:464.400000px;}
+.y51{bottom:471.600000px;}
+.y19{bottom:474.300000px;}
+.y50{bottom:481.500000px;}
+.y18{bottom:484.200000px;}
+.y17{bottom:494.100000px;}
+.y4f{bottom:494.700000px;}
+.y16{bottom:504.000000px;}
+.y4e{bottom:504.600000px;}
+.y15{bottom:513.900000px;}
+.y4d{bottom:514.500000px;}
+.y14{bottom:523.800000px;}
+.y4c{bottom:527.700000px;}
+.y13{bottom:533.700000px;}
+.y4b{bottom:537.600000px;}
+.y12{bottom:543.600000px;}
+.y4a{bottom:547.500000px;}
+.y11{bottom:553.500000px;}
+.y49{bottom:557.400000px;}
+.y10{bottom:563.400000px;}
+.y48{bottom:567.300000px;}
+.yf{bottom:573.300000px;}
+.y47{bottom:577.200000px;}
+.ye{bottom:583.200000px;}
+.y46{bottom:587.100000px;}
+.yd{bottom:593.100000px;}
+.y45{bottom:597.000000px;}
+.yc{bottom:603.000000px;}
+.y44{bottom:606.900000px;}
+.yb{bottom:612.900000px;}
+.y43{bottom:616.800000px;}
+.ya{bottom:622.800000px;}
+.y42{bottom:629.700000px;}
+.y9{bottom:632.700000px;}
+.y41{bottom:639.600000px;}
+.y8{bottom:642.600000px;}
+.y40{bottom:649.500000px;}
+.y7{bottom:652.500000px;}
+.y3f{bottom:659.400000px;}
+.y6{bottom:662.400000px;}
+.y3e{bottom:669.300000px;}
+.y5{bottom:672.300000px;}
+.y4{bottom:682.200000px;}
+.y3{bottom:692.100000px;}
+.y2{bottom:702.000000px;}
+.y0{bottom:726.500000px;}
+.y1{bottom:730.500000px;}
+.h1{height:1.000000px;}
+.h2{height:29.480000px;}
+.h3{height:32.520000px;}
+.h0{height:792.000000px;}
+.w1{width:444.000000px;}
+.w0{width:612.000000px;}
+.x0{left:122.000000px;}
+.x2{left:140.100000px;}
+.x3{left:147.600000px;}
+.x1{left:183.000000px;}
+.x4{left:203.700000px;}
+.x6{left:350.100000px;}
+.x5{left:368.100000px;}
+@media print{
+.v0{vertical-align:0.000000pt;}
+.ls49{letter-spacing:-2.922667pt;}
+.ls1{letter-spacing:-2.384000pt;}
+.ls47{letter-spacing:-2.299733pt;}
+.ls6b{letter-spacing:-2.248533pt;}
+.ls40{letter-spacing:-2.117333pt;}
+.ls57{letter-spacing:-2.048000pt;}
+.ls86{letter-spacing:-1.994667pt;}
+.ls3d{letter-spacing:-1.946667pt;}
+.ls4a{letter-spacing:-1.945600pt;}
+.ls32{letter-spacing:-1.648000pt;}
+.ls2f{letter-spacing:-1.595733pt;}
+.ls83{letter-spacing:-1.557333pt;}
+.ls48{letter-spacing:-1.514667pt;}
+.lsc{letter-spacing:-1.386667pt;}
+.ls31{letter-spacing:-1.274667pt;}
+.ls4d{letter-spacing:-1.232000pt;}
+.ls2{letter-spacing:-1.216000pt;}
+.ls6c{letter-spacing:-1.178667pt;}
+.ls4{letter-spacing:-1.098667pt;}
+.ls30{letter-spacing:-1.082667pt;}
+.ls7c{letter-spacing:-1.013333pt;}
+.ls3b{letter-spacing:-0.981333pt;}
+.ls43{letter-spacing:-0.938667pt;}
+.ls82{letter-spacing:-0.922667pt;}
+.ls7d{letter-spacing:-0.842667pt;}
+.ls22{letter-spacing:-0.816000pt;}
+.ls4e{letter-spacing:-0.762667pt;}
+.ls3e{letter-spacing:-0.757333pt;}
+.ls46{letter-spacing:-0.752000pt;}
+.ls33{letter-spacing:-0.677333pt;}
+.lsa{letter-spacing:-0.640000pt;}
+.ls3{letter-spacing:-0.634667pt;}
+.ls70{letter-spacing:-0.629333pt;}
+.ls36{letter-spacing:-0.549333pt;}
+.ls5{letter-spacing:-0.533333pt;}
+.ls6d{letter-spacing:-0.522667pt;}
+.ls9{letter-spacing:-0.469333pt;}
+.ls41{letter-spacing:-0.464000pt;}
+.ls3a{letter-spacing:-0.458667pt;}
+.ls11{letter-spacing:-0.442667pt;}
+.ls59{letter-spacing:-0.437333pt;}
+.ls25{letter-spacing:-0.432000pt;}
+.ls4c{letter-spacing:-0.405333pt;}
+.ls69{letter-spacing:-0.384000pt;}
+.ls6e{letter-spacing:-0.378667pt;}
+.ls62{letter-spacing:-0.373333pt;}
+.ls84{letter-spacing:-0.341333pt;}
+.ls1f{letter-spacing:-0.336000pt;}
+.ls12{letter-spacing:-0.330667pt;}
+.ls1a{letter-spacing:-0.314667pt;}
+.ls55{letter-spacing:-0.309333pt;}
+.lse{letter-spacing:-0.288000pt;}
+.ls56{letter-spacing:-0.256000pt;}
+.ls2a{letter-spacing:-0.250667pt;}
+.ls44{letter-spacing:-0.245333pt;}
+.ls6f{letter-spacing:-0.234667pt;}
+.ls42{letter-spacing:-0.229333pt;}
+.ls8{letter-spacing:-0.202667pt;}
+.ls64{letter-spacing:-0.181333pt;}
+.lsb{letter-spacing:-0.176000pt;}
+.lsf{letter-spacing:-0.165333pt;}
+.ls37{letter-spacing:-0.154667pt;}
+.ls5e{letter-spacing:-0.149333pt;}
+.ls24{letter-spacing:-0.138667pt;}
+.ls85{letter-spacing:-0.133333pt;}
+.ls23{letter-spacing:-0.117333pt;}
+.ls7e{letter-spacing:-0.106667pt;}
+.ls7f{letter-spacing:-0.096000pt;}
+.ls77{letter-spacing:-0.085333pt;}
+.ls65{letter-spacing:-0.080000pt;}
+.ls1b{letter-spacing:-0.074667pt;}
+.ls1c{letter-spacing:-0.069333pt;}
+.ls7{letter-spacing:-0.064000pt;}
+.ls28{letter-spacing:-0.048000pt;}
+.ls5c{letter-spacing:-0.042667pt;}
+.ls80{letter-spacing:-0.037333pt;}
+.ls3c{letter-spacing:-0.032000pt;}
+.ls51{letter-spacing:-0.026667pt;}
+.ls3f{letter-spacing:-0.021333pt;}
+.ls74{letter-spacing:-0.016000pt;}
+.ls18{letter-spacing:-0.010667pt;}
+.ls16{letter-spacing:0.000000pt;}
+.ls72{letter-spacing:0.005333pt;}
+.ls75{letter-spacing:0.010667pt;}
+.ls79{letter-spacing:0.016000pt;}
+.ls68{letter-spacing:0.032000pt;}
+.ls71{letter-spacing:0.048000pt;}
+.ls27{letter-spacing:0.058667pt;}
+.ls67{letter-spacing:0.069333pt;}
+.ls2b{letter-spacing:0.074667pt;}
+.ls34{letter-spacing:0.080000pt;}
+.ls19{letter-spacing:0.085333pt;}
+.ls14{letter-spacing:0.090667pt;}
+.ls4f{letter-spacing:0.096000pt;}
+.ls2e{letter-spacing:0.101333pt;}
+.ls73{letter-spacing:0.117333pt;}
+.ls4b{letter-spacing:0.122667pt;}
+.ls1d{letter-spacing:0.128000pt;}
+.ls35{letter-spacing:0.133333pt;}
+.ls17{letter-spacing:0.138667pt;}
+.ls53{letter-spacing:0.144000pt;}
+.ls5f{letter-spacing:0.149333pt;}
+.ls52{letter-spacing:0.154667pt;}
+.ls15{letter-spacing:0.165333pt;}
+.ls7a{letter-spacing:0.170667pt;}
+.ls38{letter-spacing:0.176000pt;}
+.ls0{letter-spacing:0.181333pt;}
+.ls2d{letter-spacing:0.186667pt;}
+.ls1e{letter-spacing:0.192000pt;}
+.ls66{letter-spacing:0.197333pt;}
+.ls13{letter-spacing:0.202667pt;}
+.ls20{letter-spacing:0.234667pt;}
+.ls5a{letter-spacing:0.245333pt;}
+.ls39{letter-spacing:0.250667pt;}
+.ls26{letter-spacing:0.256000pt;}
+.ls6a{letter-spacing:0.277333pt;}
+.ls60{letter-spacing:0.293333pt;}
+.ls76{letter-spacing:0.309333pt;}
+.ls63{letter-spacing:0.330667pt;}
+.ls81{letter-spacing:0.336000pt;}
+.ls61{letter-spacing:0.341333pt;}
+.ls54{letter-spacing:0.346667pt;}
+.ls10{letter-spacing:0.357333pt;}
+.ls21{letter-spacing:0.362667pt;}
+.ls50{letter-spacing:0.373333pt;}
+.ls78{letter-spacing:0.384000pt;}
+.ls29{letter-spacing:0.410667pt;}
+.ls45{letter-spacing:0.416000pt;}
+.ls5d{letter-spacing:0.437333pt;}
+.ls6{letter-spacing:0.458667pt;}
+.ls58{letter-spacing:0.474667pt;}
+.lsd{letter-spacing:0.533333pt;}
+.ls2c{letter-spacing:0.549333pt;}
+.ls5b{letter-spacing:0.864000pt;}
+.ls7b{letter-spacing:1.280000pt;}
+.ws1{word-spacing:0.000000pt;}
+.ws40{word-spacing:4.373333pt;}
+.wsf{word-spacing:5.861333pt;}
+.ws1e{word-spacing:5.866667pt;}
+.ws51{word-spacing:5.968000pt;}
+.ws10{word-spacing:5.973333pt;}
+.ws2c{word-spacing:6.016000pt;}
+.ws0{word-spacing:7.093333pt;}
+.ws20{word-spacing:7.338667pt;}
+.ws1d{word-spacing:7.573333pt;}
+.ws31{word-spacing:7.578667pt;}
+.ws2a{word-spacing:7.664000pt;}
+.ws42{word-spacing:8.693333pt;}
+.ws12{word-spacing:9.125333pt;}
+.ws48{word-spacing:9.152000pt;}
+.ws15{word-spacing:9.173333pt;}
+.ws2b{word-spacing:9.178667pt;}
+.ws2e{word-spacing:9.200000pt;}
+.ws4c{word-spacing:9.285333pt;}
+.ws44{word-spacing:10.293333pt;}
+.ws43{word-spacing:10.437333pt;}
+.ws19{word-spacing:10.720000pt;}
+.ws37{word-spacing:10.757333pt;}
+.ws46{word-spacing:10.762667pt;}
+.ws23{word-spacing:10.773333pt;}
+.ws36{word-spacing:10.800000pt;}
+.ws4a{word-spacing:10.848000pt;}
+.ws52{word-spacing:12.314667pt;}
+.ws35{word-spacing:12.341333pt;}
+.ws13{word-spacing:12.373333pt;}
+.ws6{word-spacing:12.378667pt;}
+.ws14{word-spacing:12.469333pt;}
+.ws4e{word-spacing:12.528000pt;}
+.ws24{word-spacing:12.538667pt;}
+.ws50{word-spacing:13.829333pt;}
+.ws5{word-spacing:13.973333pt;}
+.ws3e{word-spacing:13.978667pt;}
+.ws27{word-spacing:14.074667pt;}
+.wsc{word-spacing:14.096000pt;}
+.ws25{word-spacing:14.101333pt;}
+.ws3b{word-spacing:15.472000pt;}
+.ws3c{word-spacing:15.488000pt;}
+.ws1b{word-spacing:15.573333pt;}
+.ws4f{word-spacing:16.693333pt;}
+.ws4b{word-spacing:17.168000pt;}
+.wsd{word-spacing:17.173333pt;}
+.ws3d{word-spacing:18.736000pt;}
+.ws4d{word-spacing:18.741333pt;}
+.ws32{word-spacing:18.752000pt;}
+.wse{word-spacing:18.773333pt;}
+.ws38{word-spacing:18.816000pt;}
+.ws33{word-spacing:20.261333pt;}
+.ws1a{word-spacing:20.373333pt;}
+.ws3a{word-spacing:20.378667pt;}
+.ws30{word-spacing:20.432000pt;}
+.ws34{word-spacing:21.968000pt;}
+.ws11{word-spacing:21.973333pt;}
+.ws45{word-spacing:22.112000pt;}
+.ws2d{word-spacing:23.061333pt;}
+.ws28{word-spacing:23.493333pt;}
+.ws9{word-spacing:23.573333pt;}
+.ws29{word-spacing:23.808000pt;}
+.ws22{word-spacing:24.608000pt;}
+.ws4{word-spacing:24.725333pt;}
+.ws47{word-spacing:25.253333pt;}
+.ws8{word-spacing:25.285333pt;}
+.ws21{word-spacing:26.293333pt;}
+.ws18{word-spacing:26.773333pt;}
+.ws1c{word-spacing:28.368000pt;}
+.ws7{word-spacing:28.394667pt;}
+.ws1f{word-spacing:28.522667pt;}
+.ws2f{word-spacing:29.914667pt;}
+.ws26{word-spacing:31.573333pt;}
+.wsa{word-spacing:33.173333pt;}
+.ws3{word-spacing:34.293333pt;}
+.wsb{word-spacing:34.773333pt;}
+.ws49{word-spacing:34.810667pt;}
+.ws2{word-spacing:35.893333pt;}
+.ws39{word-spacing:39.573333pt;}
+.ws16{word-spacing:41.173333pt;}
+.ws3f{word-spacing:42.730667pt;}
+.ws41{word-spacing:43.893333pt;}
+.ws17{word-spacing:44.394667pt;}
+._c{margin-left:-3.426133pt;}
+._2{margin-left:-2.080000pt;}
+._1{width:1.482667pt;}
+._7{width:2.965333pt;}
+._4{width:6.410667pt;}
+._3{width:8.218667pt;}
+._5{width:9.877333pt;}
+._b{width:16.000000pt;}
+._9{width:19.194667pt;}
+._d{width:21.173333pt;}
+._8{width:23.408000pt;}
+._a{width:31.978667pt;}
+._6{width:38.405333pt;}
+._0{width:172.725333pt;}
+._f{width:732.586667pt;}
+._e{width:915.210667pt;}
+.fs1{font-size:42.666667pt;}
+.fs0{font-size:53.333333pt;}
+.y78{bottom:64.400000pt;}
+.y3d{bottom:93.600000pt;}
+.y77{bottom:106.800000pt;}
+.y3c{bottom:107.200000pt;}
+.y76{bottom:120.000000pt;}
+.y3b{bottom:126.000000pt;}
+.y75{bottom:133.200000pt;}
+.y3a{bottom:139.600000pt;}
+.y74{bottom:150.800000pt;}
+.y39{bottom:153.200000pt;}
+.y73{bottom:164.000000pt;}
+.y38{bottom:166.800000pt;}
+.y72{bottom:177.200000pt;}
+.y37{bottom:180.400000pt;}
+.y71{bottom:190.400000pt;}
+.y36{bottom:199.200000pt;}
+.y70{bottom:203.600000pt;}
+.y35{bottom:212.800000pt;}
+.y6f{bottom:216.800000pt;}
+.y6e{bottom:230.000000pt;}
+.y34{bottom:233.200000pt;}
+.y33{bottom:246.800000pt;}
+.y6d{bottom:249.200000pt;}
+.y6c{bottom:262.400000pt;}
+.y6b{bottom:275.600000pt;}
+.y32{bottom:280.000000pt;}
+.y6a{bottom:288.800000pt;}
+.y31{bottom:293.600000pt;}
+.y69{bottom:302.000000pt;}
+.y30{bottom:307.200000pt;}
+.y68{bottom:315.200000pt;}
+.y2f{bottom:320.800000pt;}
+.y67{bottom:328.400000pt;}
+.y2e{bottom:334.400000pt;}
+.y66{bottom:341.600000pt;}
+.y2d{bottom:348.000000pt;}
+.y65{bottom:354.800000pt;}
+.y2c{bottom:361.600000pt;}
+.y64{bottom:368.000000pt;}
+.y2b{bottom:375.200000pt;}
+.y63{bottom:381.200000pt;}
+.y2a{bottom:394.000000pt;}
+.y62{bottom:398.800000pt;}
+.y29{bottom:407.600000pt;}
+.y61{bottom:412.000000pt;}
+.y28{bottom:421.200000pt;}
+.y60{bottom:425.200000pt;}
+.y27{bottom:434.800000pt;}
+.y5f{bottom:438.400000pt;}
+.y5e{bottom:451.600000pt;}
+.y26{bottom:453.600000pt;}
+.y5d{bottom:464.800000pt;}
+.y25{bottom:467.200000pt;}
+.y5c{bottom:478.000000pt;}
+.y24{bottom:480.400000pt;}
+.y5b{bottom:491.200000pt;}
+.y23{bottom:493.600000pt;}
+.y5a{bottom:504.400000pt;}
+.y22{bottom:506.800000pt;}
+.y59{bottom:517.600000pt;}
+.y21{bottom:520.000000pt;}
+.y58{bottom:530.800000pt;}
+.y20{bottom:533.200000pt;}
+.y57{bottom:544.000000pt;}
+.y1f{bottom:546.400000pt;}
+.y56{bottom:557.200000pt;}
+.y1e{bottom:566.400000pt;}
+.y55{bottom:576.000000pt;}
+.y1d{bottom:579.600000pt;}
+.y54{bottom:589.200000pt;}
+.y1c{bottom:592.800000pt;}
+.y53{bottom:602.400000pt;}
+.y1b{bottom:606.000000pt;}
+.y52{bottom:615.600000pt;}
+.y1a{bottom:619.200000pt;}
+.y51{bottom:628.800000pt;}
+.y19{bottom:632.400000pt;}
+.y50{bottom:642.000000pt;}
+.y18{bottom:645.600000pt;}
+.y17{bottom:658.800000pt;}
+.y4f{bottom:659.600000pt;}
+.y16{bottom:672.000000pt;}
+.y4e{bottom:672.800000pt;}
+.y15{bottom:685.200000pt;}
+.y4d{bottom:686.000000pt;}
+.y14{bottom:698.400000pt;}
+.y4c{bottom:703.600000pt;}
+.y13{bottom:711.600000pt;}
+.y4b{bottom:716.800000pt;}
+.y12{bottom:724.800000pt;}
+.y4a{bottom:730.000000pt;}
+.y11{bottom:738.000000pt;}
+.y49{bottom:743.200000pt;}
+.y10{bottom:751.200000pt;}
+.y48{bottom:756.400000pt;}
+.yf{bottom:764.400000pt;}
+.y47{bottom:769.600000pt;}
+.ye{bottom:777.600000pt;}
+.y46{bottom:782.800000pt;}
+.yd{bottom:790.800000pt;}
+.y45{bottom:796.000000pt;}
+.yc{bottom:804.000000pt;}
+.y44{bottom:809.200000pt;}
+.yb{bottom:817.200000pt;}
+.y43{bottom:822.400000pt;}
+.ya{bottom:830.400000pt;}
+.y42{bottom:839.600000pt;}
+.y9{bottom:843.600000pt;}
+.y41{bottom:852.800000pt;}
+.y8{bottom:856.800000pt;}
+.y40{bottom:866.000000pt;}
+.y7{bottom:870.000000pt;}
+.y3f{bottom:879.200000pt;}
+.y6{bottom:883.200000pt;}
+.y3e{bottom:892.400000pt;}
+.y5{bottom:896.400000pt;}
+.y4{bottom:909.600000pt;}
+.y3{bottom:922.800000pt;}
+.y2{bottom:936.000000pt;}
+.y0{bottom:968.666667pt;}
+.y1{bottom:974.000000pt;}
+.h1{height:1.333333pt;}
+.h2{height:39.306667pt;}
+.h3{height:43.360000pt;}
+.h0{height:1056.000000pt;}
+.w1{width:592.000000pt;}
+.w0{width:816.000000pt;}
+.x0{left:162.666667pt;}
+.x2{left:186.800000pt;}
+.x3{left:196.800000pt;}
+.x1{left:244.000000pt;}
+.x4{left:271.600000pt;}
+.x6{left:466.800000pt;}
+.x5{left:490.800000pt;}
+}
 </style>
+<script>
+/*
+ Copyright 2012 Mozilla Foundation 
+ Copyright 2013 Lu Wang <coolwanglu@gmail.com>
+ Apachine License Version 2.0 
+*/
+(function(){function b(a,b,e,f){var c=(a.className||"").split(/\s+/g);""===c[0]&&c.shift();var d=c.indexOf(b);0>d&&e&&c.push(b);0<=d&&f&&c.splice(d,1);a.className=c.join(" ");return 0<=d}if(!("classList"in document.createElement("div"))){var e={add:function(a){b(this.element,a,!0,!1)},contains:function(a){return b(this.element,a,!1,!1)},remove:function(a){b(this.element,a,!1,!0)},toggle:function(a){b(this.element,a,!0,!0)}};Object.defineProperty(HTMLElement.prototype,"classList",{get:function(){if(this._classList)return this._classList;
+var a=Object.create(e,{element:{value:this,writable:!1,enumerable:!0}});Object.defineProperty(this,"_classList",{value:a,writable:!1,enumerable:!1});return a},enumerable:!0})}})();
+</script>
+<script>
+(function(){/*
+ pdf2htmlEX.js: Core UI functions for pdf2htmlEX 
+ Copyright 2012,2013 Lu Wang <coolwanglu@gmail.com> and other contributors 
+ https://github.com/coolwanglu/pdf2htmlEX/blob/master/share/LICENSE 
+*/
+var pdf2htmlEX=window.pdf2htmlEX=window.pdf2htmlEX||{},CSS_CLASS_NAMES={page_frame:"pf",page_content_box:"pc",page_data:"pi",background_image:"bi",link:"l",input_radio:"ir",__dummy__:"no comma"},DEFAULT_CONFIG={container_id:"page-container",sidebar_id:"sidebar",outline_id:"outline",loading_indicator_cls:"loading-indicator",preload_pages:3,render_timeout:100,scale_step:0.9,key_handler:!0,hashchange_handler:!0,view_history_handler:!0,__dummy__:"no comma"},EPS=1E-6;
+function invert(a){var b=a[0]*a[3]-a[1]*a[2];return[a[3]/b,-a[1]/b,-a[2]/b,a[0]/b,(a[2]*a[5]-a[3]*a[4])/b,(a[1]*a[4]-a[0]*a[5])/b]}function transform(a,b){return[a[0]*b[0]+a[2]*b[1]+a[4],a[1]*b[0]+a[3]*b[1]+a[5]]}function get_page_number(a){return parseInt(a.getAttribute("data-page-no"),16)}function disable_dragstart(a){for(var b=0,c=a.length;b<c;++b)a[b].addEventListener("dragstart",function(){return!1},!1)}
+function clone_and_extend_objs(a){for(var b={},c=0,e=arguments.length;c<e;++c){var h=arguments[c],d;for(d in h)h.hasOwnProperty(d)&&(b[d]=h[d])}return b}
+function Page(a){if(a){this.shown=this.loaded=!1;this.page=a;this.num=get_page_number(a);this.original_height=a.clientHeight;this.original_width=a.clientWidth;var b=a.getElementsByClassName(CSS_CLASS_NAMES.page_content_box)[0];b&&(this.content_box=b,this.original_scale=this.cur_scale=this.original_height/b.clientHeight,this.page_data=JSON.parse(a.getElementsByClassName(CSS_CLASS_NAMES.page_data)[0].getAttribute("data-data")),this.ctm=this.page_data.ctm,this.ictm=invert(this.ctm),this.loaded=!0)}}
+Page.prototype={hide:function(){this.loaded&&this.shown&&(this.content_box.classList.remove("opened"),this.shown=!1)},show:function(){this.loaded&&!this.shown&&(this.content_box.classList.add("opened"),this.shown=!0)},rescale:function(a){this.cur_scale=0===a?this.original_scale:a;this.loaded&&(a=this.content_box.style,a.msTransform=a.webkitTransform=a.transform="scale("+this.cur_scale.toFixed(3)+")");a=this.page.style;a.height=this.original_height*this.cur_scale+"px";a.width=this.original_width*this.cur_scale+
+"px"},view_position:function(){var a=this.page,b=a.parentNode;return[b.scrollLeft-a.offsetLeft-a.clientLeft,b.scrollTop-a.offsetTop-a.clientTop]},height:function(){return this.page.clientHeight},width:function(){return this.page.clientWidth}};function Viewer(a){this.config=clone_and_extend_objs(DEFAULT_CONFIG,0<arguments.length?a:{});this.pages_loading=[];this.init_before_loading_content();var b=this;document.addEventListener("DOMContentLoaded",function(){b.init_after_loading_content()},!1)}
+Viewer.prototype={scale:1,cur_page_idx:0,first_page_idx:0,init_before_loading_content:function(){this.pre_hide_pages()},initialize_radio_button:function(){for(var a=document.getElementsByClassName(CSS_CLASS_NAMES.input_radio),b=0;b<a.length;b++)a[b].addEventListener("click",function(){this.classList.toggle("checked")})},init_after_loading_content:function(){this.sidebar=document.getElementById(this.config.sidebar_id);this.outline=document.getElementById(this.config.outline_id);this.container=document.getElementById(this.config.container_id);
+this.loading_indicator=document.getElementsByClassName(this.config.loading_indicator_cls)[0];for(var a=!0,b=this.outline.childNodes,c=0,e=b.length;c<e;++c)if("ul"===b[c].nodeName.toLowerCase()){a=!1;break}a||this.sidebar.classList.add("opened");this.find_pages();if(0!=this.pages.length){disable_dragstart(document.getElementsByClassName(CSS_CLASS_NAMES.background_image));this.config.key_handler&&this.register_key_handler();var h=this;this.config.hashchange_handler&&window.addEventListener("hashchange",
+function(a){h.navigate_to_dest(document.location.hash.substring(1))},!1);this.config.view_history_handler&&window.addEventListener("popstate",function(a){a.state&&h.navigate_to_dest(a.state)},!1);this.container.addEventListener("scroll",function(){h.update_page_idx();h.schedule_render(!0)},!1);[this.container,this.outline].forEach(function(a){a.addEventListener("click",h.link_handler.bind(h),!1)});this.initialize_radio_button();this.render()}},find_pages:function(){for(var a=[],b={},c=this.container.childNodes,
+e=0,h=c.length;e<h;++e){var d=c[e];d.nodeType===Node.ELEMENT_NODE&&d.classList.contains(CSS_CLASS_NAMES.page_frame)&&(d=new Page(d),a.push(d),b[d.num]=a.length-1)}this.pages=a;this.page_map=b},load_page:function(a,b,c){var e=this.pages;if(!(a>=e.length||(e=e[a],e.loaded||this.pages_loading[a]))){var e=e.page,h=e.getAttribute("data-page-url");if(h){this.pages_loading[a]=!0;var d=e.getElementsByClassName(this.config.loading_indicator_cls)[0];"undefined"===typeof d&&(d=this.loading_indicator.cloneNode(!0),
+d.classList.add("active"),e.appendChild(d));var f=this,g=new XMLHttpRequest;g.open("GET",h,!0);g.onload=function(){if(200===g.status||0===g.status){var b=document.createElement("div");b.innerHTML=g.responseText;for(var d=null,b=b.childNodes,e=0,h=b.length;e<h;++e){var p=b[e];if(p.nodeType===Node.ELEMENT_NODE&&p.classList.contains(CSS_CLASS_NAMES.page_frame)){d=p;break}}b=f.pages[a];f.container.replaceChild(d,b.page);b=new Page(d);f.pages[a]=b;b.hide();b.rescale(f.scale);disable_dragstart(d.getElementsByClassName(CSS_CLASS_NAMES.background_image));
+f.schedule_render(!1);c&&c(b)}delete f.pages_loading[a]};g.send(null)}void 0===b&&(b=this.config.preload_pages);0<--b&&(f=this,setTimeout(function(){f.load_page(a+1,b)},0))}},pre_hide_pages:function(){var a="@media screen{."+CSS_CLASS_NAMES.page_content_box+"{display:none;}}",b=document.createElement("style");b.styleSheet?b.styleSheet.cssText=a:b.appendChild(document.createTextNode(a));document.head.appendChild(b)},render:function(){for(var a=this.container,b=a.scrollTop,c=a.clientHeight,a=b-c,b=
+b+c+c,c=this.pages,e=0,h=c.length;e<h;++e){var d=c[e],f=d.page,g=f.offsetTop+f.clientTop,f=g+f.clientHeight;g<=b&&f>=a?d.loaded?d.show():this.load_page(e):d.hide()}},update_page_idx:function(){var a=this.pages,b=a.length;if(!(2>b)){for(var c=this.container,e=c.scrollTop,c=e+c.clientHeight,h=-1,d=b,f=d-h;1<f;){var g=h+Math.floor(f/2),f=a[g].page;f.offsetTop+f.clientTop+f.clientHeight>=e?d=g:h=g;f=d-h}this.first_page_idx=d;for(var g=h=this.cur_page_idx,k=0;d<b;++d){var f=a[d].page,l=f.offsetTop+f.clientTop,
+f=f.clientHeight;if(l>c)break;f=(Math.min(c,l+f)-Math.max(e,l))/f;if(d===h&&Math.abs(f-1)<=EPS){g=h;break}f>k&&(k=f,g=d)}this.cur_page_idx=g}},schedule_render:function(a){if(void 0!==this.render_timer){if(!a)return;clearTimeout(this.render_timer)}var b=this;this.render_timer=setTimeout(function(){delete b.render_timer;b.render()},this.config.render_timeout)},register_key_handler:function(){var a=this;window.addEventListener("DOMMouseScroll",function(b){if(b.ctrlKey){b.preventDefault();var c=a.container,
+e=c.getBoundingClientRect(),c=[b.clientX-e.left-c.clientLeft,b.clientY-e.top-c.clientTop];a.rescale(Math.pow(a.config.scale_step,b.detail),!0,c)}},!1);window.addEventListener("keydown",function(b){var c=!1,e=b.ctrlKey||b.metaKey,h=b.altKey;switch(b.keyCode){case 61:case 107:case 187:e&&(a.rescale(1/a.config.scale_step,!0),c=!0);break;case 173:case 109:case 189:e&&(a.rescale(a.config.scale_step,!0),c=!0);break;case 48:e&&(a.rescale(0,!1),c=!0);break;case 33:h?a.scroll_to(a.cur_page_idx-1):a.container.scrollTop-=
+a.container.clientHeight;c=!0;break;case 34:h?a.scroll_to(a.cur_page_idx+1):a.container.scrollTop+=a.container.clientHeight;c=!0;break;case 35:a.container.scrollTop=a.container.scrollHeight;c=!0;break;case 36:a.container.scrollTop=0,c=!0}c&&b.preventDefault()},!1)},rescale:function(a,b,c){var e=this.scale;this.scale=a=0===a?1:b?e*a:a;c||(c=[0,0]);b=this.container;c[0]+=b.scrollLeft;c[1]+=b.scrollTop;for(var h=this.pages,d=h.length,f=this.first_page_idx;f<d;++f){var g=h[f].page;if(g.offsetTop+g.clientTop>=
+c[1])break}g=f-1;0>g&&(g=0);var g=h[g].page,k=g.clientWidth,f=g.clientHeight,l=g.offsetLeft+g.clientLeft,m=c[0]-l;0>m?m=0:m>k&&(m=k);k=g.offsetTop+g.clientTop;c=c[1]-k;0>c?c=0:c>f&&(c=f);for(f=0;f<d;++f)h[f].rescale(a);b.scrollLeft+=m/e*a+g.offsetLeft+g.clientLeft-m-l;b.scrollTop+=c/e*a+g.offsetTop+g.clientTop-c-k;this.schedule_render(!0)},fit_width:function(){var a=this.cur_page_idx;this.rescale(this.container.clientWidth/this.pages[a].width(),!0);this.scroll_to(a)},fit_height:function(){var a=this.cur_page_idx;
+this.rescale(this.container.clientHeight/this.pages[a].height(),!0);this.scroll_to(a)},get_containing_page:function(a){for(;a;){if(a.nodeType===Node.ELEMENT_NODE&&a.classList.contains(CSS_CLASS_NAMES.page_frame)){a=get_page_number(a);var b=this.page_map;return a in b?this.pages[b[a]]:null}a=a.parentNode}return null},link_handler:function(a){var b=a.target,c=b.getAttribute("data-dest-detail");if(c){if(this.config.view_history_handler)try{var e=this.get_current_view_hash();window.history.replaceState(e,
+"","#"+e);window.history.pushState(c,"","#"+c)}catch(h){}this.navigate_to_dest(c,this.get_containing_page(b));a.preventDefault()}},navigate_to_dest:function(a,b){try{var c=JSON.parse(a)}catch(e){return}if(c instanceof Array){var h=c[0],d=this.page_map;if(h in d){for(var f=d[h],h=this.pages[f],d=2,g=c.length;d<g;++d){var k=c[d];if(null!==k&&"number"!==typeof k)return}for(;6>c.length;)c.push(null);var g=b||this.pages[this.cur_page_idx],d=g.view_position(),d=transform(g.ictm,[d[0],g.height()-d[1]]),
+g=this.scale,l=[0,0],m=!0,k=!1,n=this.scale;switch(c[1]){case "XYZ":l=[null===c[2]?d[0]:c[2]*n,null===c[3]?d[1]:c[3]*n];g=c[4];if(null===g||0===g)g=this.scale;k=!0;break;case "Fit":case "FitB":l=[0,0];k=!0;break;case "FitH":case "FitBH":l=[0,null===c[2]?d[1]:c[2]*n];k=!0;break;case "FitV":case "FitBV":l=[null===c[2]?d[0]:c[2]*n,0];k=!0;break;case "FitR":l=[c[2]*n,c[5]*n],m=!1,k=!0}if(k){this.rescale(g,!1);var p=this,c=function(a){l=transform(a.ctm,l);m&&(l[1]=a.height()-l[1]);p.scroll_to(f,l)};h.loaded?
+c(h):(this.load_page(f,void 0,c),this.scroll_to(f))}}}},scroll_to:function(a,b){var c=this.pages;if(!(0>a||a>=c.length)){c=c[a].view_position();void 0===b&&(b=[0,0]);var e=this.container;e.scrollLeft+=b[0]-c[0];e.scrollTop+=b[1]-c[1]}},get_current_view_hash:function(){var a=[],b=this.pages[this.cur_page_idx];a.push(b.num);a.push("XYZ");var c=b.view_position(),c=transform(b.ictm,[c[0],b.height()-c[1]]);a.push(c[0]/this.scale);a.push(c[1]/this.scale);a.push(this.scale);return JSON.stringify(a)}};
+pdf2htmlEX.Viewer=Viewer;})();
+</script>
+<script>
+try{
+pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
+}catch(e){}
+</script>
+<title></title>
 </head>
-<body onload="start()">
-<img id="background" style="position:absolute; left:0px; top:0px;" width="556" height="790" src="page12.png">
-<div class="txt" style="position:absolute; left:98px; top:86px;"><span id="f3" style="font-size:9px;vertical-align:baseline;color:#231f1f;">XII INTRODUCTION</span></div>
-<div class="txt" style="position:absolute; left:98px; top:120px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">This is most notable with respect to war powers and the declaration of national emergencies,</span></div>
-<div class="txt" style="position:absolute; left:98px; top:130px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">but is also true for domestic presidential concerns, as in the controversy over the power of the</span></div>
-<div class="txt" style="position:absolute; left:98px; top:140px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">President to impound appropriated funds.</span></div>
-<div class="txt" style="position:absolute; left:114px; top:150px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">Perhaps coincidentally, the Supreme Court during the same period effected a strong judi-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:160px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">cial interest in the adjudication of separation-of-powers controversies. Previously, despite its use</span></div>
-<div class="txt" style="position:absolute; left:98px; top:170px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">of separation-of-power language, the Court did little to involve itself in actual controversies,</span></div>
-<div class="txt" style="position:absolute; left:98px; top:180px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">save perhaps the </span><span id="f4" style="font-size:7px;vertical-align:baseline;color:#231f1f;">Myers </span><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">and </span><span id="f4" style="font-size:7px;vertical-align:baseline;color:#231f1f;">Humphrey </span><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">litigations over the President’s power to remove execu-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:190px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">tive branch officials. But that restraint evaporated in 1976. Since then there have been several</span></div>
-<div class="txt" style="position:absolute; left:98px; top:200px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">Court decisions in this area, although in </span><span id="f4" style="font-size:7px;vertical-align:baseline;color:#231f1f;">Buckley v. Valeo </span><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">and subsequent cases the Court ap-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:210px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">peared to cast the judicial perspective favorably upon presidential prerogative. In other cases</span></div>
-<div class="txt" style="position:absolute; left:98px; top:220px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">statutory construction was utilized to preserve the President’s discretion. Only very recently</span></div>
-<div class="txt" style="position:absolute; left:98px; top:230px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">has the Court evolved an arguably consistent standard in this area, a two-pronged standard of</span></div>
-<div class="txt" style="position:absolute; left:98px; top:240px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">aggrandizement and impairment, but the results still are cast in terms of executive preemi-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:250px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">nence.</span></div>
-<div class="txt" style="position:absolute; left:114px; top:260px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">The larger conﬂict has been political, and the Court resisted many efforts to involve it in</span></div>
-<div class="txt" style="position:absolute; left:98px; top:270px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">litigation over the use of troops in Vietnam. In the context of treaty termination, the Court</span></div>
-<div class="txt" style="position:absolute; left:98px; top:280px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">came close to declaring the resurgence of the political question doctrine to all such executive-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:290px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">congressional disputes. While a signiﬁcant congressional interest in achieving a new and differ-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:300px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">ent balance between the political branches appeared to have survived cessation of the Vietnam</span></div>
-<div class="txt" style="position:absolute; left:98px; top:310px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">conﬂict, such efforts largely diminished after the terrorist attacks of September 11, 2001. While</span></div>
-<div class="txt" style="position:absolute; left:98px; top:320px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">Congressional assertion of such interest may well involve the judiciary to a greater extent in</span></div>
-<div class="txt" style="position:absolute; left:98px; top:330px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">the future, the congressional branch is not without effective weapons of its own in this regard.</span></div>
-<div class="txt" style="position:absolute; left:251px; top:347px;"><span id="f5" style="font-size:7px;vertical-align:baseline;color:#231f1f;">SECTION III</span></div>
-<div class="txt" style="position:absolute; left:114px; top:361px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">The Court’s practice of overturning economic legislation under principles of substantive due</span></div>
-<div class="txt" style="position:absolute; left:98px; top:371px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">process in order to protect “property” was already in sharp decline when Professor Corwin wrote</span></div>
-<div class="txt" style="position:absolute; left:98px; top:381px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">his introduction in the 1950s. In a few isolated cases, however, especially regarding the obliga-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:391px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">tion of contracts clause and perhaps the expansion of the regulatory takings doctrine, the Court</span></div>
-<div class="txt" style="position:absolute; left:98px; top:401px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">demonstrated that some life is left in the old doctrines. On the other hand, the word “liberty” in</span></div>
-<div class="txt" style="position:absolute; left:98px; top:411px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">the due process clauses of the Fifth and Fourteenth Amendment has been seized upon by the</span></div>
-<div class="txt" style="position:absolute; left:98px; top:421px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">Court to harness substantive due process to the protection of certain personal and familial pri-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:431px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">vacy rights, most controversially in the abortion cases.</span></div>
-<div class="txt" style="position:absolute; left:114px; top:441px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">Although the decision in </span><span id="f4" style="font-size:7px;vertical-align:baseline;color:#231f1f;">Roe v. Wade </span><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">seemed to foreshadow broad constitutional protec-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:451px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">tions for personal activities, this did not occur immediately, as much due to conceptual difficul-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:461px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">ties as to ideological resistance. Early iterations of a right to “privacy” or “to be let alone” seemed</span></div>
-<div class="txt" style="position:absolute; left:98px; top:471px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">to involve both the notion that certain information should be “private” and the idea that certain</span></div>
-<div class="txt" style="position:absolute; left:98px; top:481px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">personal “activities” should only be lightly regulated. Then, for a time, the privacy cases ap-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:491px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">peared to be limited to certain areas of personal concern: marriage, procreation, contraception,</span></div>
-<div class="txt" style="position:absolute; left:98px; top:501px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">family relationships, medical decision making and child rearing. Most recently, however, the</span></div>
-<div class="txt" style="position:absolute; left:98px; top:511px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">Court has brought the outer limits of the doctrine into question again by overturning a sodomy</span></div>
-<div class="txt" style="position:absolute; left:98px; top:521px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">law directed at homosexuals without attempting to show that such behavior was in fact histori-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:531px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">cally condoned. This raises the question as to what limiting principles remain available in evalu-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:541px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">ating future arguments based on personal autonomy.</span></div>
-<div class="txt" style="position:absolute; left:114px; top:551px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">Whereas much of the Bill of Rights is directed toward prescribing the process of how gov-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:561px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">ernments may permissibly deprive one of life, liberty, or property—for example by judgment of</span></div>
-<div class="txt" style="position:absolute; left:98px; top:571px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">a jury of one’s peers or with evidence seized through reasonable searches—the First Amend-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:581px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">ment is by its terms both substantive and absolute. While the application of the First Amend-</span></div>
-<div class="txt" style="position:absolute; left:98px; top:591px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">ment has never been presumed to be so absolute, the effect has often been indistinguishable.</span></div>
-<div class="txt" style="position:absolute; left:98px; top:601px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">Thus, the trend over the years has been to withdraw more and more speech and “speech-plus”</span></div>
-<div class="txt" style="position:absolute; left:98px; top:611px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">from the regulatory and prohibitive hand of government and to free not only speech directed to</span></div>
-<div class="txt" style="position:absolute; left:98px; top:621px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">political ends but speech that is totally unrelated to any political purpose.</span></div>
-<div class="txt" style="position:absolute; left:114px; top:632px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">The constitutionalization of the law of defamation, narrowing the possibility of recovery for</span></div>
-<div class="txt" style="position:absolute; left:98px; top:642px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">damage caused by libelous and slanderous criticism of public officials, political candidates, and</span></div>
-<div class="txt" style="position:absolute; left:98px; top:651px;"><span id="f3" style="font-size:7px;vertical-align:baseline;color:#231f1f;">public ﬁgures, epitomizes this trend. In addition, the government’s right to proscribe the advo-</span></div>
+<body>
+<div id="sidebar">
+<div id="outline">
+</div>
+</div>
+<div id="page-container">
+<div id="pf1" class="pf w0 h0" data-page-no="1"><div class="pc pc1 w0 h0"><img class="bi x0 y0 w1 h1" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA3gAAAACCAIAAACFXekjAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAHElEQVRYw+3BAQ0AAADCoPdPbQ43oAAAAAAAXgwU0gABuadROgAAAABJRU5ErkJggg=="/><div class="t m0 x1 h2 y1 ff1 fs0 fc0 sc0 ls0 ws0">EMINENT DOMAIN; PUBLIC ACQUISITION OF PROPERTY<span class="_ _0"> </span><span class="ls1 ws1">35.510</span></div><div class="t m0 x2 h2 y2 ff1 fs0 fc0 sc0 ls2 ws2">35.410 Right to <span class="ls3 ws3">contest change in</span></div><div class="t m0 x0 h2 y3 ff1 fs0 fc0 sc0 ls4 ws4">public purpose use; notice <span class="_ _1"></span>of <span class="_ _1"></span>proposed</div><div class="t m0 x0 h3 y4 ff1 fs0 fc0 sc0 ls5 ws1">change.<span class="ff2 ls6 ws5"> A prior owner of real <span class="_ _2"></span><span class="ls7 ws6">property ac-</span></span></div><div class="t m0 x0 h3 y5 ff2 fs0 fc0 sc0 ls8 ws7">quired <span class="_ _2"></span>pursuant to an agreement entered</div><div class="t m0 x0 h3 y6 ff2 fs0 fc0 sc0 ls9 ws8">in<span class="_ _1"></span>t<span class="_ _1"></span>o under ORS <span class="_ _2"></span><span class="lsa ws9">35.385 (1) or a judgment</span></div><div class="t m0 x0 h3 y7 ff2 fs0 fc0 sc0 lsb wsa">given under ORS <span class="lsc wsb">35.235 and 35.385 (2),</span></div><div class="t m0 x0 h3 y8 ff2 fs0 fc0 sc0 lsd ws1">whichever  <span class="lse wsc">applies, or the <span class="lsf ws5">designated benefi-</span></span></div><div class="t m0 x0 h3 y9 ff2 fs0 fc0 sc0 ls10 wsd">ciary of such owner, may contest <span class="ls11 wse">any pro-</span></div><div class="t m0 x0 h3 ya ff2 fs0 fc0 sc0 ls12 ws1">posed <span class="_ _3"> </span><span class="ls13 wsf">change by the <span class="ls14 ws10">condemner in the public</span></span></div><div class="t m0 x0 h3 yb ff2 fs0 fc0 sc0 ls15 ws11">purpose for which such real property <span class="_ _2"></span>was</div><div class="t m0 x0 h3 yc ff2 fs0 fc0 sc0 ls16 ws12">acquired <span class="_ _2"></span>in the manner provided for contest-</div><div class="t m0 x0 h3 yd ff2 fs0 fc0 sc0 ls17 ws13">ing a change in the period specified for the</div><div class="t m0 x0 h3 ye ff2 fs0 fc0 sc0 ls18 ws14">use of such real <span class="ls19 ws13">property by the condemner</span></div><div class="t m0 x0 h3 yf ff2 fs0 fc0 sc0 ls1a ws5">under ORS 35.395 (4). The resolution or or-</div><div class="t m0 x0 h3 y10 ff2 fs0 fc0 sc0 ls1b ws15">dinance of the condemner is presumptive ev-</div><div class="t m0 x0 h3 y11 ff2 fs0 fc0 sc0 ls14 ws16">idence that a proposed change of use</div><div class="t m0 x0 h3 y12 ff2 fs0 fc0 sc0 ls1c ws10">proposed by the condemner is reasonable and</div><div class="t m0 x0 h3 y13 ff2 fs0 fc0 sc0 ls0 ws17">necessary <span class="_ _2"></span>in the public interest. Each</div><div class="t m0 x0 h3 y14 ff2 fs0 fc0 sc0 ls1d ws18">condemner proposing any such change in</div><div class="t m0 x0 h3 y15 ff2 fs0 fc0 sc0 ls1e ws19">public purpose shall notify each <span class="_ _1"></span>such <span class="_ _1"></span>owner</div><div class="t m0 x0 h3 y16 ff2 fs0 fc0 sc0 ls1f ws11">o<span class="_ _1"></span>r<span class="_ _1"></span> designated <span class="ls20 ws1a">beneficiary of such proposed</span></div><div class="t m0 x0 h3 y17 ff2 fs0 fc0 sc0 ls21 ws1">change <span class="_ _4"></span><span class="ls22">and <span class="_ _5"> </span><span class="ls23 ws15">the reasons therefor in the man-</span></span></div><div class="t m0 x0 h3 y18 ff2 fs0 fc0 sc0 ls24 ws1b">ner provided in ORS <span class="_ _2"></span><span class="ls25 ws5">35.395 (2) for notifica-</span></div><div class="t m0 x0 h3 y19 ff2 fs0 fc0 sc0 ls1d ws1c">tion <span class="_ _2"></span>of a <span class="_ _2"></span>proposed change in the period</div><div class="t m0 x0 h3 y1a ff2 fs0 fc0 sc0 ls26 ws1d">specified for use of such <span class="ls27 ws1e">real property <span class="ls28 ws10">by the</span></span></div><div class="t m0 x0 h3 y1b ff2 fs0 fc0 sc0 ls29 ws1d">condemner. Each such notice <span class="_ _2"></span><span class="ls2a ws10">shall be mailed</span></div><div class="t m0 x0 h3 y1c ff2 fs0 fc0 sc0 ls2b ws5">to the most recent address of the <span class="ls2c ws13">owner or</span></div><div class="t m0 x0 h3 y1d ff2 fs0 fc0 sc0 ls2d ws1f">designated <span class="_ _2"></span>beneficiary <span class="_ _2"></span>of record with the</div><div class="t m0 x0 h3 y1e ff2 fs0 fc0 sc0 ls2e ws1">condemner.<span class="_ _6"> </span><span class="fs1 ls2f ws20">[1973 c.720 §7]</span></div><div class="t m0 x2 h2 y1f ff1 fs0 fc0 sc0 ls30 ws21">35.415 Application of <span class="ls31 ws22">ORS 35.385 to</span></div><div class="t m0 x0 h3 y20 ff1 fs0 fc0 sc0 ls32 ws1">35.415.<span class="ff2 ls33 ws10"> (1) ORS 35.385 to 35.415 apply only to</span></div><div class="t m0 x0 h3 y21 ff2 fs0 fc0 sc0 ls34 ws5">property acquired after the filing <span class="_ _1"></span>of <span class="_ _1"></span>a <span class="_ _1"></span>com-</div><div class="t m0 x0 h3 y22 ff2 fs0 fc0 sc0 ls35 ws23">plaint pursuant to a resolution or ordinance</div><div class="t m0 x0 h3 y23 ff2 fs0 fc0 sc0 ls36 ws23">adopted as provided in ORS 35.235 (1) on <span class="_ _7"></span>o<span class="_ _1"></span>r</div><div class="t m0 x0 h3 y24 ff2 fs0 fc0 sc0 ls37 ws5">after October 5, 1973, and for <span class="ws1">which  <span class="ls38 ws24">a con-</span></span></div><div class="t m0 x0 h3 y25 ff2 fs0 fc0 sc0 ls39 ws5">demnation action is commenced <span class="ls1d ws25">on or <span class="_ _1"></span>after</span></div><div class="t m0 x0 h3 y26 ff2 fs0 fc0 sc0 ls3a ws1d">October 5, 1973.</div><div class="t m0 x2 h3 y27 ff2 fs0 fc0 sc0 ls5 ws26">(2) Notwithstanding ORS 35.375, ORS</div><div class="t m0 x0 h3 y28 ff2 fs0 fc0 sc0 ls3b wse">35.385 to 35.415 apply to <span class="_ _1"></span><span class="ls16 ws1a">real property ac-</span></div><div class="t m0 x0 h3 y29 ff2 fs0 fc0 sc0 ls3c ws15">quired by a county pursuant to <span class="_ _2"></span>ORS chapter</div><div class="t m0 x0 h3 y2a ff2 fs0 fc0 sc0 ls3d ws1">368.</div><div class="t m0 x2 h3 y2b ff2 fs0 fc0 sc0 ls3e ws27">(3) <span class="_ _2"></span>ORS <span class="_ _2"></span>35.385 to 35.415 shall not apply</div><div class="t m0 x0 h3 y2c ff2 fs0 fc0 sc0 ls3f ws28">to <span class="_ _1"></span>any <span class="_ _1"></span>real property acquired under ORS</div><div class="t m0 x0 h3 y2d ff2 fs0 fc0 sc0 ls40 ws1">35.385 <span class="_ _8"> </span><span class="ls41 ws29">(1) and <span class="ls42 ws9">(2) after the date the real</span></span></div><div class="t m0 x0 h3 y2e ff2 fs0 fc0 sc0 ls14 ws2a">property <span class="_ _1"></span>is used <span class="_ _1"></span>for the purpose for which it</div><div class="t m0 x0 h3 y2f ff2 fs0 fc0 sc0 ls14 ws2b">was acquired nor <span class="ls43 ws23">shall ORS 35.385 to 35.415</span></div><div class="t m0 x0 h3 y30 ff2 fs0 fc0 sc0 ls14 ws2c">apply <span class="_ _1"></span>to <span class="_ _1"></span>any <span class="_ _1"></span>tract of real property where the</div><div class="t m0 x0 h3 y31 ff2 fs0 fc0 sc0 ls44 ws10">compensation and damages paid to the <span class="ls45 ws1">owner</span></div><div class="t m0 x0 h3 y32 ff2 fs0 fc0 sc0 ls46 ws1d">is less than $1,000.<span class="_ _6"> </span><span class="fs1 ls47 ws1">[1973<span class="_ _9"> </span><span class="ls48">c.720<span class="_ _9"> </span>§8;<span class="_ _9"> </span><span class="ls49">1981<span class="_ _9"> </span></span>c.153<span class="_ _9"> </span><span class="ls4a">§53]</span></span></span></div><div class="t m0 x3 h2 y33 ff1 fs0 fc0 sc0 ls4b ws0">RELOCATION OF DISPLACED</div><div class="t m0 x4 h2 y34 ff1 fs0 fc0 sc0 ls4c ws1">PERSONS</div><div class="t m0 x2 h2 y35 ff1 fs0 fc0 sc0 ls4d ws2d">35.500 Definitions for ORS 35.500 t<span class="_ _1"></span>o</div><div class="t m0 x0 h3 y36 ff1 fs0 fc0 sc0 ls32 ws1">35.530.<span class="ff2 ls4e ws1d"> As used in ORS 35.500 to 35.530:</span></div><div class="t m0 x2 h3 y37 ff2 fs0 fc0 sc0 ls35 ws2e">(1) “Displaced person” means any <span class="_ _1"></span>person</div><div class="t m0 x0 h3 y38 ff2 fs0 fc0 sc0 ls17 ws2f">who <span class="_ _1"></span>moves, <span class="_ _1"></span>or <span class="_ _1"></span>is required to move the</div><div class="t m0 x0 h3 y39 ff2 fs0 fc0 sc0 ls27 ws13">person’s residence and personal property in-</div><div class="t m0 x0 h3 y3a ff2 fs0 fc0 sc0 ls21 ws30">cident thereto, or <span class="_ _2"></span>the <span class="_ _2"></span><span class="ls4f wse">person’s business or</span></div><div class="t m0 x0 h3 y3b ff2 fs0 fc0 sc0 ls3c ws1d">farm operation as a result of:</div><div class="t m0 x2 h3 y3c ff2 fs0 fc0 sc0 ls50 wse">(a) Acquisition of the real <span class="ls51 ws1a">property, in</span></div><div class="t m0 x0 h3 y3d ff2 fs0 fc0 sc0 ls52 ws31">whole or in part, by a public entity; or</div><div class="t m0 x5 h3 y2 ff2 fs0 fc0 sc0 ls1e ws32">(b) <span class="_ _1"></span>Receipt <span class="_ _1"></span>of <span class="_ _1"></span>a written order by such</div><div class="t m0 x6 h3 y3 ff2 fs0 fc0 sc0 ls53 ws33">person from a public <span class="_ _1"></span>entity <span class="_ _1"></span>to <span class="_ _1"></span>vacate <span class="_ _7"></span>the</div><div class="t m0 x6 h3 y4 ff2 fs0 fc0 sc0 ls4b ws1d">property for public use.</div><div class="t m0 x5 h3 y3e ff2 fs0 fc0 sc0 ls26 ws1d">(2) “Federal Act” means the Uniform Re-</div><div class="t m0 x6 h3 y3f ff2 fs0 fc0 sc0 ls54 ws34">location Assistance and Real <span class="_ _2"></span>Property Ac-</div><div class="t m0 x6 h3 y40 ff2 fs0 fc0 sc0 ls55 ws1d">quisition Policies Act of 1970 (P.L. 91-646, 42</div><div class="t m0 x6 h3 y41 ff2 fs0 fc0 sc0 ls56 ws35">U.S.C. 4601 et seq.) as in effect <span class="_ _1"></span>on <span class="_ _1"></span>January</div><div class="t m0 x6 h3 y42 ff2 fs0 fc0 sc0 ls57 ws1">1,<span class="_ _8"> </span>2003.</div><div class="t m0 x5 h3 y43 ff2 fs0 fc0 sc0 ls54 ws1b">(3) “Public entity” includes the state, a</div><div class="t m0 x6 h3 y44 ff2 fs0 fc0 sc0 ls58 ws36">county, a city, <span class="_ _1"></span>a <span class="_ _1"></span><span class="ls26 ws13">consolidated city-county as</span></div><div class="t m0 x6 h3 y45 ff2 fs0 fc0 sc0 ls59 ws37">defined <span class="_ _1"></span>in<span class="_ _1"></span> ORS 199.705 (1), a district, public</div><div class="t m0 x6 h3 y46 ff2 fs0 fc0 sc0 ls5a ws23">authority, public agency <span class="lsb ws13">and any other poli-</span></div><div class="t m0 x6 h3 y47 ff2 fs0 fc0 sc0 ls5b ws1">tical <span class="_ _3"> </span><span class="ls5c">subdivision <span class="_ _3"> </span><span class="ls5d ws1d">or public corporation in the</span></span></div><div class="t m0 x6 h3 y48 ff2 fs0 fc0 sc0 ls5e ws38">state when <span class="_ _1"></span><span class="ls5f ws1a">acquiring real property or any</span></div><div class="t m0 x6 h3 y49 ff2 fs0 fc0 sc0 ls50 ws39">interest therein for public use. “Public</div><div class="t m0 x6 h3 y4a ff2 fs0 fc0 sc0 ls60 ws3a">entity” also includes a private <span class="_ _1"></span>cor<span class="_ _1"></span>pora<span class="_ _1"></span>tio<span class="_ _1"></span>n</div><div class="t m0 x6 h3 y4b ff2 fs0 fc0 sc0 ls25 ws3b">that has <span class="ls61 ws5">the power to exercise the right of</span></div><div class="t m0 x6 h3 y4c ff2 fs0 fc0 sc0 ls62 ws1">eminent<span class="_ _8"> </span>domain.</div><div class="t m0 x5 h3 y4d ff2 fs0 fc0 sc0 ls63 ws3c">(4) <span class="_ _2"></span>“Public use” <span class="_ _2"></span>means a use for which</div><div class="t m0 x6 h3 y4e ff2 fs0 fc0 sc0 ls5c ws3d">real property may be acquired by <span class="_ _2"></span>a public</div><div class="t m0 x6 h3 y4f ff2 fs0 fc0 sc0 ls23 ws1d">entity as provided by law.</div><div class="t m0 x5 h3 y50 ff2 fs0 fc0 sc0 ls10 ws16">(5) “Real property” or any interest</div><div class="t m0 x6 h3 y51 ff2 fs0 fc0 sc0 ls64 wsb">therein includes tenements and heredita-</div><div class="t m0 x6 h3 y52 ff2 fs0 fc0 sc0 ls65 ws5">ments, and includes <span class="ws3e">every interest, <span class="_ _1"></span><span class="ls66">freehold</span></span></div><div class="t m0 x6 h3 y53 ff2 fs0 fc0 sc0 ls67 ws23">and chattel, legal <span class="_ _2"></span><span class="ls1f ws15">and equitable, present and</span></div><div class="t m0 x6 h3 y54 ff2 fs0 fc0 sc0 ls68 ws3f">future, vested and contingent, <span class="_ _1"></span>in <span class="_ _1"></span>such</div><div class="t m0 x6 h3 y55 ff2 fs0 fc0 sc0 ls69 ws40">tenements and hereditaments.<span class="_ _a"> </span><span class="fs1 ls6a ws1">[Formerly<span class="_ _b"> </span>2<span class="_ _2"></span>8<span class="_ _2"></span>1<span class="_ _c"></span><span class="ls6b">.045]</span></span></div><div class="t m0 x5 h2 y56 ff1 fs0 fc0 sc0 ls6c ws41">35.505 Relocation within neighbor-</div><div class="t m0 x6 h2 y57 ff1 fs0 fc0 sc0 ls6d ws42">hood; notice prior to <span class="ls6e ws43">move; costs <span class="ls6f ws44">and al-</span></span></div><div class="t m0 x6 h3 y58 ff1 fs0 fc0 sc0 ls70 ws1">lowances.<span class="ff2 ls68 ws45"> (1) A public <span class="_ _2"></span>entity <span class="_ _2"></span>undertaking</span></div><div class="t m0 x6 h3 y59 ff2 fs0 fc0 sc0 ls27 ws46">urban renewal or <span class="_ _1"></span>neighborhood <span class="_ _1"></span>development</div><div class="t m0 x6 h3 y5a ff2 fs0 fc0 sc0 ls71 wse">shall make all reasonable efforts to insure</div><div class="t m0 x6 h3 y5b ff2 fs0 fc0 sc0 ls37 ws23">that all displaced persons shall have the op-</div><div class="t m0 x6 h3 y5c ff2 fs0 fc0 sc0 ls66 ws5">tion<span class="_ _1"></span> <span class="_ _1"></span>to<span class="_ _1"></span> relocate within their urban renewal</div><div class="t m0 x6 h3 y5d ff2 fs0 fc0 sc0 ls72 ws47">or<span class="_ _1"></span> development neighborhood or area and</div><div class="t m0 x6 h3 y5e ff2 fs0 fc0 sc0 ls72 ws48">shall <span class="_ _1"></span>not <span class="_ _1"></span>be displaced, except temporarily as</div><div class="t m0 x6 h3 y5f ff2 fs0 fc0 sc0 ls28 ws49">required <span class="_ _2"></span>by emergency, until appropriate</div><div class="t m0 x6 h3 y60 ff2 fs0 fc0 sc0 ls68 ws11">residential units shall become available to</div><div class="t m0 x6 h3 y61 ff2 fs0 fc0 sc0 ls73 ws23">them within their neighborhood or area and</div><div class="t m0 x6 h3 y62 ff2 fs0 fc0 sc0 ls16 ws1d">within their financial means.</div><div class="t m0 x5 h3 y63 ff2 fs0 fc0 sc0 ls24 ws13">(2) Except as required <span class="ls2d ws4a">by emergency, no</span></div><div class="t m0 x6 h3 y64 ff2 fs0 fc0 sc0 ls74 ws4b">displaced person shall be required to <span class="_ _1"></span>move</div><div class="t m0 x6 h3 y65 ff2 fs0 fc0 sc0 ls75 ws5">from any real property without first having</div><div class="t m0 x6 h3 y66 ff2 fs0 fc0 sc0 ls76 ws1d">written notice from the public <span class="_ _2"></span><span class="ls72 ws10">entity at least</span></div><div class="t m0 x6 h3 y67 ff2 fs0 fc0 sc0 ls77 ws4c">90 <span class="_ _2"></span>days <span class="_ _2"></span>prior <span class="_ _2"></span>to the date by which the move</div><div class="t m0 x6 h3 y68 ff2 fs0 fc0 sc0 ls24 ws4d">is required. In <span class="_ _2"></span>no <span class="ls68 wsd">case shall any displaced</span></div><div class="t m0 x6 h3 y69 ff2 fs0 fc0 sc0 ls19 ws13">person be required to move until the public</div><div class="t m0 x6 h3 y6a ff2 fs0 fc0 sc0 ls2d ws4d">entity notifies the person in writing <span class="_ _2"></span>of all</div><div class="t m0 x6 h3 y6b ff2 fs0 fc0 sc0 ls78 ws1b">costs and allowances to which such <span class="ls74">person</span></div><div class="t m0 x6 h3 y6c ff2 fs0 fc0 sc0 ls77 ws5">may become entitled under <span class="ls79 ws4e">federal, state <span class="ls7a">or</span></span></div><div class="t m0 x6 h3 y6d ff2 fs0 fc0 sc0 ls7b ws1">local<span class="_ _8"> </span>l<span class="_ _c"></span>aw<span class="_ _2"></span>.<span class="_ _6"> </span><span class="fs1 ls6a">[Formerly<span class="_ _9"> </span><span class="ls6b">281.055]</span></span></div><div class="t m0 x5 h2 y6e ff1 fs0 fc0 sc0 ls7c ws0">35.510 Duties of public entities acquir-</div><div class="t m0 x6 h3 y6f ff1 fs0 fc0 sc0 ls7d ws4f">ing real property.<span class="ff2 ls7e wsd"> Whenever any program</span></div><div class="t m0 x6 h3 y70 ff2 fs0 fc0 sc0 ls0 ws1b">or project is undertaken by a public entity</div><div class="t m0 x6 h3 y71 ff2 fs0 fc0 sc0 ls76 ws50">which <span class="_ _2"></span>program or <span class="_ _2"></span>project will result in the</div><div class="t m0 x6 h3 y72 ff2 fs0 fc0 sc0 ls20 ws23">acquisition of real property, <span class="_ _2"></span><span class="ls7f">notwithstanding</span></div><div class="t m0 x6 h3 y73 ff2 fs0 fc0 sc0 ls80 ws1d">any other statute, <span class="ls81 ws10">charter, ordinance, or rule</span></div><div class="t m0 x6 h3 y74 ff2 fs0 fc0 sc0 ls7a ws1d">or regulation, the public entity shall:</div><div class="t m0 x5 h3 y75 ff2 fs0 fc0 sc0 ls82 ws1">(1) <span class="_ _3"> </span><span class="ls13 ws51">Provide fair and reasonable relocation</span></div><div class="t m0 x6 h3 y76 ff2 fs0 fc0 sc0 ls46 ws52">payments and <span class="_ _1"></span><span class="ls66 ws5">assistance to or for displaced</span></div><div class="t m0 x6 h3 y77 ff2 fs0 fc0 sc0 ls51 ws13">persons as provided under sections <span class="_ _c"></span><span class="ls83 ws23">202, 203,</span></div><div class="t m0 x6 h3 y3d ff2 fs0 fc0 sc0 ls84 ws1d">204 and 206 of the Federal Act;</div><div class="t m0 x0 h3 y78 ff2 fs0 fc0 sc0 ls21 ws1">Title<span class="_ _d"> </span>3<span class="_ _e"> </span><span class="ls85">Page<span class="_ _d"> </span>13<span class="_ _f"> </span><span class="ls86">(2015<span class="_ _d"> </span><span class="ls17">Edition)</span></span></span></div></div><div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div></div>
+</div>
+<div class="loading-indicator">
+<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAABGdBTUEAALGPC/xhBQAAAwBQTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAwAACAEBDAIDFgQFHwUIKggLMggPOgsQ/w1x/Q5v/w5w9w9ryhBT+xBsWhAbuhFKUhEXUhEXrhJEuxJKwBJN1xJY8hJn/xJsyhNRoxM+shNF8BNkZxMfXBMZ2xRZlxQ34BRb8BRk3hVarBVA7RZh8RZi4RZa/xZqkRcw9Rdjihgsqxg99BhibBkc5hla9xli9BlgaRoapho55xpZ/hpm8xpfchsd+Rtibxsc9htgexwichwdehwh/hxk9Rxedx0fhh4igB4idx4eeR4fhR8kfR8g/h9h9R9bdSAb9iBb7yFX/yJfpCMwgyQf8iVW/iVd+iVZ9iVWoCYsmycjhice/ihb/Sla+ylX/SpYmisl/StYjisfkiwg/ixX7CxN9yxS/S1W/i1W6y1M9y1Q7S5M6S5K+i5S6C9I/i9U+jBQ7jFK/jFStTIo+DJO9zNM7TRH+DRM/jRQ8jVJ/jZO8DhF9DhH9jlH+TlI/jpL8jpE8zpF8jtD9DxE7zw9/z1I9j1A9D5C+D5D4D8ywD8nwD8n90A/8kA8/0BGxEApv0El7kM5+ENA+UNAykMp7kQ1+0RB+EQ+7EQ2/0VCxUUl6kU0zkUp9UY8/kZByUkj1Eoo6Usw9Uw3300p500t3U8p91Ez11Ij4VIo81Mv+FMz+VM0/FM19FQw/lQ19VYv/lU1/1cz7Fgo/1gy8Fkp9lor4loi/1sw8l0o9l4o/l4t6l8i8mAl+WEn8mEk52Id9WMk9GMk/mMp+GUj72Qg8mQh92Uj/mUn+GYi7WYd+GYj6mYc62cb92ch8Gce7mcd6Wcb6mcb+mgi/mgl/Gsg+2sg+Wog/moj/msi/mwh/m0g/m8f/nEd/3Ic/3Mb/3Qb/3Ua/3Ya/3YZ/3cZ/3cY/3gY/0VC/0NE/0JE/w5wl4XsJQAAAPx0Uk5TAAAAAAAAAAAAAAAAAAAAAAABCQsNDxMWGRwhJioyOkBLT1VTUP77/vK99zRpPkVmsbbB7f5nYabkJy5kX8HeXaG/11H+W89Xn8JqTMuQcplC/op1x2GZhV2I/IV+HFRXgVSN+4N7n0T5m5RC+KN/mBaX9/qp+pv7mZr83EX8/N9+5Nip1fyt5f0RQ3rQr/zo/cq3sXr9xrzB6hf+De13DLi8RBT+wLM+7fTIDfh5Hf6yJMx0/bDPOXI1K85xrs5q8fT47f3q/v7L/uhkrP3lYf2ryZ9eit2o/aOUmKf92ILHfXNfYmZ3a9L9ycvG/f38+vr5+vz8/Pv7+ff36M+a+AAAAAFiS0dEQP7ZXNgAAAj0SURBVFjDnZf/W1J5Fsf9D3guiYYwKqglg1hqplKjpdSojYizbD05iz5kTlqjqYwW2tPkt83M1DIm5UuomZmkW3bVrmupiCY1mCNKrpvYM7VlTyjlZuM2Y+7nXsBK0XX28xM8957X53zO55z3OdcGt/zi7Azbhftfy2b5R+IwFms7z/RbGvI15w8DdkVHsVi+EGa/ZZ1bYMDqAIe+TRabNv02OiqK5b8Z/em7zs3NbQO0GoD0+0wB94Ac/DqQEI0SdobIOV98Pg8AfmtWAxBnZWYK0vYfkh7ixsVhhMDdgZs2zc/Pu9HsVwc4DgiCNG5WQoJ/sLeXF8070IeFEdzpJh+l0pUB+YBwRJDttS3cheJKp9MZDMZmD5r7+vl1HiAI0qDtgRG8lQAlBfnH0/Miqa47kvcnccEK2/1NCIdJ96Ctc/fwjfAGwXDbugKgsLggPy+csiOZmyb4LiEOjQMIhH/YFg4TINxMKxxaCmi8eLFaLJVeyi3N2eu8OTctMzM9O2fjtsjIbX5ewf4gIQK/5gR4uGP27i5LAdKyGons7IVzRaVV1Jjc/PzjP4TucHEirbUjEOyITvQNNH+A2MLj0NYDAM1x6RGk5e9raiQSkSzR+XRRcUFOoguJ8NE2kN2XfoEgsUN46DFoDlZi0DA3Bwiyg9TzpaUnE6kk/OL7xgdE+KBOgKSkrbUCuHJ1bu697KDrGZEoL5yMt5YyPN9glo9viu96GtEKQFEO/34tg1omEVVRidBy5bUdJXi7R4SIxWJzPi1cYwMMV1HO10gqnQnLFygPEDxSaPPuYPlEiD8B3IIrqDevvq9ytl1JPjhhrMBdIe7zaHG5oZn5sQf7YirgJqrV/aWHLPnPCQYis2U9RthjawHIFa0NnZcpZbCMTbRmnszN3mz5EwREJmX7JrQ6nU0eyFvbtX2dyi42/yqcQf40fnIsUsfSBIJIixhId7OCA7aA8nR3sTfF4EHn3d5elaoeONBEXXR/hWdzgZvHMrMjXWwtVczxZ3nwdm76fBvJfAvtajUgKPfxO1VHHRY5f6PkJBCBwrQcSor8WFIQFgl5RFQw/RuWjwveDGjr16jVvT3UBmXPYgdw0jPFOyCgEem5fw06BMqTu/+AGMeJjtrA8aGRFhJpqEejvlvl2qeqJC2J3+nSRHwhWlyZXvTkrLSEhAQuRxoW5RXA9aZ/yESUkMrv7IpffIWXbhSW5jkVlhQUpHuxHdbQt0b6ZcWF4vdHB9MjWNs5cgsAatd0szvu9rguSmFxWUVZSUmM9ERocbarPfoQ4nETNtofiIvzDIpCFUJqzgPFYI+rVt3k9MH2ys0bOFw1qG+R6DDelnmuYAcGF38vyHKxE++M28BBu47PbrE5kR62UB6qzSFQyBtvVZfDdVdwF2tO7jsrugCK93Rxoi1mf+QHtgNOyo3bxgsEis9i+a3BAA8GWlwHNRlYmTdqkQ64DobhHwNuzl0mVctKGKhS5jGBfW5mdjgJAs0nbiP9KyCVUSyaAwAoHvSPXGYMDgjRGCq0qgykE64/WAffrP5bPVl6ToJeZFFJDMCkp+/BUjUpwYvORdXWi2IL8uDR2NjIdaYJAOy7UpnlqlqHW3A5v66CgbsoQb3PLT2MB1mR+BkWiqTvACAuOnivEwFn82TixYuxsWYTQN6u7hI6Qg3KWvtLZ6/xy2E+rrqmCHhfiIZCznMyZVqSAAV4u4Dj4GwmpiYBoYXxeKSWgLvfpRaCl6qV4EbK4MMNcKVt9TVZjCWnIcjcgAV+9K+yXLCY2TwyTk1OvrjD0I4027f2DAgdwSaNPZ0xQGFq+SAQDXPvMe/zPBeyRFokiPwyLdRUODZtozpA6GeMj9xxbB24l4Eo5Di5VtUMdajqHYHOwbK5SrAVz/mDUoqzj+wJSfsiwJzKvJhh3aQxdmjsnqdicGCgu097X3G/t7tDq2wiN5bD1zIOL1aZY8fTXZMFAtPwguYBHvl5Soj0j8VDSEb9vQGN5hbS06tUqapIuBuHDzoTCItS/ER+DiUpU5C964Ootk3cZj58cdsOhycz4pvvXGf23W3q7I4HkoMnLOkR0qKCUDo6h2TtWgAoXvYz/jXZH4O1MQIzltiuro0N/8x6fygsLmYHoVOEIItnATyZNg636V8Mm3eDcK2avzMh6/bSM6V5lNwCjLAVMlfjozevB5mjk7qF0aNR1x27TGsoLC3dx88uwOYQIGsY4PmvM2+mnyO6qVGL9sq1GqF1By6dE+VRThQX54RG7qESTUdAfns7M/PGwHs29WrI8t6DO6lWW4z8vES0l1+St5dCsl9j6Uzjs7OzMzP/fnbKYNQjlhcZ1lt0dYWkinJG9JeFtLIAAEGPIHqjoW3F0fpKRU0e9aJI9Cfo4/beNmwwGPTv3hhSnk4bf16JcOXH3yvY/CIJ0LlP5gO8A5nsHDs8PZryy7TRgCxnLq+ug2V7PS+AWeiCvZUx75RhZjzl+bRxYkhuPf4NmH3Z3PsaSQXfCkBhePuf8ZSneuOrfyBLEYrqchXcxPYEkwwg1Cyc4RPA7Oyvo6cQw2ujbhRRLDLXdimVVVQgUjBGqFy7FND2G7iMtwaE90xvnHr18BekUSHHhoe21vY+Za+yZZ9zR13d5crKs7JrslTiUsATFDD79t2zU8xhvRHIlP7xI61W+3CwX6NRd7WkUmK0SuVBMpHo5PnncCcrR3g+a1rTL5+mMJ/f1r1C1XZkZASITEttPCWmoUel6ja1PwiCrATxKfDgXfNR9lH9zMtxJIAZe7QZrOu1wng2hTGk7UHnkI/b39IgDv8kdCXb4aFnoDKmDaNPEITJZDKY/KEObR84BTqH1JNX+mLBOxCxk7W9ezvz5vVr4yvdxMvHj/X94BT11+8BxN3eJvJqPvvAfaKE6fpa3eQkFohaJyJzGJ1D6kmr+m78J7iMGV28oz0ygRHuUG1R6e3TqIXEVQHQ+9Cz0cYFRAYQzMMXLz6Vgl8VoO0lsMeMoPGpqUmdZfiCbPGr/PRF4i0je6PBaBSS/vjHN35hK+QnoTP+//t6Ny+Cw5qVHv8XF+mWyZITVTkAAAAASUVORK5CYII="/>
+</div>
 </body>
 </html>

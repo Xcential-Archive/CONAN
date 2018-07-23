@@ -14,13 +14,13 @@ serviceModule.factory('configuration', ['$rootScope', 'localStorage', '$location
                 host = $location.protocol() + "://" + $location.host() + ":" + $location.port();
             }
             */
-            //host = $location.protocol() +"://" + $location.host()+"/elasticproxy";
-            host = "http://localhost:9200";
+            host = $location.protocol() +"://" + $location.host()+"/elasticproxy";
+            //host = "http://localhost:9200";
 
             configuration = {
                 title: undefined,
                 description: undefined,
-                includedIndexes: 'oregontitles',
+                includedIndexes: 'oregonproperty',
                 displayFields: undefined,
                 highlightFields: undefined,
                 excludedIndexes: undefined,
