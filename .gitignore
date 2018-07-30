@@ -1,5 +1,4 @@
 venv/
-pdf/
 .vscode
 .DS_Store
-
+pdf-files
