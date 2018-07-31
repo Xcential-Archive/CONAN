@@ -78887,7 +78887,7 @@ module.exports = utils;
 
 // Declare app level module which depends on filters, and services
 var myApp = angular.module('myApp', ['ngRoute','ngSanitize', 'myApp.filters', 'myApp.services', 'myApp.directives', 'ui.bootstrap','elasticsearch']).config(['$routeProvider', function ($routeProvider) {
-            $routeProvider.when('/query', {templateUrl: 'partials/query.html', controller: 'QueryCtrl'});
+            $routeProvider.when('/query', {templateUrl: 'partials/query.html', controller: 'QueryCtrl',  reloadOnSearch: false});
             $routeProvider.when('/tools/suggestions', {templateUrl: 'partials/suggestions.html', controller: 'SuggestionsCtrl'});
             $routeProvider.when('/about', {templateUrl: 'partials/about.html'});
             $routeProvider.otherwise({redirectTo: '/query'});
@@ -79048,7 +79048,7 @@ NodeInfoCtrl.$inject = ['$scope', 'elastic', '$routeParams'];
 
 (function () {
 
-function QueryCtrl($scope, $modal, elastic, aggregateBuilder, queryStorage) {
+function QueryCtrl($scope, $modal, $routeParams, $location, elastic, aggregateBuilder, queryStorage) {
     $scope.fields = [];
     $scope.createdQuery = "";
 
@@ -79078,6 +79078,8 @@ function QueryCtrl($scope, $modal, elastic, aggregateBuilder, queryStorage) {
     $scope.numPages = 0;
     $scope.pageSize = 10;
     $scope.totalItems = 0;
+
+
 
     $scope.$watchCollection('query', function () {
         $scope.changeQuery();
@@ -79184,6 +79186,8 @@ function QueryCtrl($scope, $modal, elastic, aggregateBuilder, queryStorage) {
         searchField.type = 'or';
         //searchField.type = $scope.query.advanced.newType;
         $scope.query.advanced.searchFields.push(searchField);
+        $scope.queryString = searchField.text;
+        $location.search('queryString', searchField.text);
     };
 
     $scope.removeAggregateField = function (name) {
@@ -79292,13 +79296,15 @@ function QueryCtrl($scope, $modal, elastic, aggregateBuilder, queryStorage) {
         query.size = $scope.pageSize;
         query.from = ($scope.currentPage - 1) * $scope.pageSize;
 
-        var chosenIndices = [];
-        angular.forEach($scope.query.indices, function (value) {
-            if (value.state) {
-                chosenIndices.push(value.name);
-            }
-        });
-        query.index = chosenIndices.toString();
+        if($scope.query && $scope.query.indices && $scope.query.indices.length>0){
+            var chosenIndices = [];
+            angular.forEach($scope.query.indices, function (value) {
+                if (value.state) {
+                    chosenIndices.push(value.name);
+                }
+            });
+            query.index = chosenIndices.toString();
+        }
 
 
 
@@ -79306,6 +79312,11 @@ function QueryCtrl($scope, $modal, elastic, aggregateBuilder, queryStorage) {
             "default_field" : "text",
             "query" : $scope.query.advanced.newText
         };
+
+        if($scope.queryString){
+            console.log('Creating query with: ' + $scope.queryString);
+            query_string.query = $scope.queryString;
+        }
       
         query.body.query.query_string = query_string;
 
@@ -79318,10 +79329,16 @@ function QueryCtrl($scope, $modal, elastic, aggregateBuilder, queryStorage) {
     };
 
     $scope.resetQuery();
+
+    if($location.search().queryString){
+        $scope.queryString  = $location.search().queryString;
+        $scope.query.advanced.newText = $scope.queryString;
+        $scope.changeQuery();
+    }
 }
 angular
       .module('myApp')
-      .controller('QueryCtrl', ['$scope', '$modal', 'elastic', 'aggregateBuilder', 'queryStorage', QueryCtrl]);
+      .controller('QueryCtrl', ['$scope', '$modal', '$routeParams', '$location', 'elastic', 'aggregateBuilder', 'queryStorage', QueryCtrl]);
 })();
 
 (function () {
