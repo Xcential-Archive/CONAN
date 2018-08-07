@@ -79328,6 +79328,14 @@ function QueryCtrl($scope, $modal, $routeParams, $location, elastic, aggregateBu
         console.log(errors);
     };
 
+    $scope.sortingFunction = function(doc){
+        if($scope.pagesort){
+            return parseInt(doc._source['pagenumber']);
+        }else{
+            return false 
+        }
+    }
+
     $scope.resetQuery();
 
     if($location.search().queryString){

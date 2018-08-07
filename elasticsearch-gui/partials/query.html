@@ -45,6 +45,9 @@
                            placeholder="Type your search string"/>
                 </div>
                <button class="btn btn-info" ng-click="addSearchField()"><span class="glyphicon glyphicon-search glyphicon-white"></span> Search</button>
+               <label>Page sort:
+                <input type="checkbox" ng-model="pagesort"/>
+              </label>
             
             </div>
         </div>
@@ -69,7 +72,7 @@
                     </div>
                 </div>
 
-                <div ng-repeat="doc in queryResults.hits" style="margin-bottom:15px">
+                <div ng-repeat="doc in queryResults.hits | orderBy:sortingFunction" style="margin-bottom:15px">
                     <div class="row" ng-click="doc.showDetails = !doc.showDetails;" style="cursor:pointer;" >
                         <div class="col-xs-1 col-md-1" ng-style="doc.showDetails && {'background-color': '#31beb1'}" style="background-clip:content-box">p.{{doc._source['pagenumber']}}</div>
                         <div class="col-xs-6 col-sm-6 col-md-9" ng-bind-html="doc.highlight['text'].join('...')"></div>
