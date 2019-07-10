@@ -19,9 +19,9 @@ function QueryCtrl($scope, $modal, $routeParams, $location, elastic, aggregateBu
     $scope.query.advanced.newType = 'or';
     $scope.query.multiSearch=true;
 
-    $scope.query.doctypes = [{'name':'bill'},{'name':'act'},{'name':'amendment'}];
+    $scope.query.doctypes = [{'name':'fr-notice'},{'name':'fr-rule'}];
 
-    $scope.query.subjects={0:{'name':'Courts','forPrint':'Courts, Civil Procedure(1-55)'},1:{'name':'Business Organizations, Commercial Code','forPrint':'Business Organizations, Commercial Code(56-88)'},2:{'name':'Landlord-Tenant, Domestic Relations, Probate','forPrint':'Landlord-Tenant, Domestic Relations, Probate (90-131A)'}, 3:{'name':'...','forPrint':'...'}, 4:{'name':'Eminent Domain; Public Acquisition of Property','forPrint':'Eminent Domain; Public Acquisition of Property'}, 5:{'name':'Water', 'forPrint':'Water (Title 45)'}, };
+    $scope.query.subjects={0:{'name':'FRNotices','forPrint':'FR Notices'},1:{'name':'FR Rule','forPrint':'FR Rule'}}
 
 
     // initialize pagination
@@ -157,8 +157,7 @@ function QueryCtrl($scope, $modal, $routeParams, $location, elastic, aggregateBu
             $scope.queryResults = results.hits;
             for(var i=0; i< $scope.queryResults.hits.length; i++){
                 console.log(i);
-                $scope.queryResults.hits[i].pdfurl = '/pdf/pageindex-'+ $scope.queryResults.hits[i]._source.pageindex.toString()+'.pdf';
-                $scope.queryResults.hits[i].htmlurl = '/html/page'+ ($scope.queryResults.hits[i]._source.pageindex +1).toString()+'.html';
+                console.log($scope.queryResults.hits[i]);
             }
             $scope.aggsResults = results.aggregations;
             $scope.numPages = Math.ceil(results.hits.total / $scope.pageSize);

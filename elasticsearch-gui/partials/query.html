@@ -45,7 +45,7 @@
                            placeholder="Type your search string"/>
                 </div>
                <button class="btn btn-info" ng-click="addSearchField()"><span class="glyphicon glyphicon-search glyphicon-white"></span> Search</button>
-               <label>Page sort:
+               <label ng-if=false>Page sort:
                 <input type="checkbox" ng-model="pagesort"/>
               </label>
             
@@ -60,12 +60,12 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Results</h3>
 
-                <p style="margin-top:10px;">Total hits "{{queryResults.total}}"</p>
+                <p style="margin-top:10px;">Total results: "{{queryResults.total.value}}"</p>
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-1">
-                        <span class="text-info">Location</span>
+                    <div class="col-md-2">
+                        <span class="text-info">FR Doc</span>
                     </div>
                     <div class="col-md-3">
                         <span class="text-info">Text</span>
@@ -74,7 +74,8 @@
 
                 <div ng-repeat="doc in queryResults.hits | orderBy:sortingFunction" style="margin-bottom:15px">
                     <div class="row" ng-click="doc.showDetails = !doc.showDetails;" style="cursor:pointer;" >
-                        <div class="col-xs-1 col-md-1" ng-style="doc.showDetails && {'background-color': '#31beb1'}" style="background-clip:content-box">p.{{doc._source['pagenumber']}}</div>
+                        <div ng-if=false class="col-xs-1 col-md-1" ng-style="doc.showDetails && {'background-color': '#31beb1'}" style="background-clip:content-box">p.{{doc._source['pagenumber']}}</div>
+                        <div class="col-xs-2 col-md-2" ng-style="doc.showDetails && {'background-color': 'lightblue'}" style="background-clip:content-box">{{doc._source['frdoc'].replace('frdoc','')}}</div>
                         <div class="col-xs-6 col-sm-6 col-md-9" ng-bind-html="doc.highlight['text'].join('...')"></div>
                     </div>
                     <div class="row" ng-show="doc.showDetails">
