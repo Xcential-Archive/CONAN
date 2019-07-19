@@ -14,7 +14,7 @@ serviceModule.factory('configuration', ['$rootScope', 'localStorage', '$location
                 host = $location.protocol() + "://" + $location.host() + ":" + $location.port();
             }
             */
-            host = $location.protocol() +"://" + $location.host()+"/elasticproxy";
+            host = $location.protocol() +"://" + $location.host()+"/elasticproxy/fr-notices";
             //host = "http://localhost:9200";
 
             configuration = {
