@@ -23,7 +23,7 @@ serviceModule.factory('configuration', ['$rootScope', 'localStorage', '$location
                 includedIndexes: ['fr-notices'],
                 displayFields: undefined,
                 highlightFields: undefined,
-                excludedIndexes: undefined,
+                excludedIndexes: ['fr-notices'],
                 serverUrl: host
             };
         }
