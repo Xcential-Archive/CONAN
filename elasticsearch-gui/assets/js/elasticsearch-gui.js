@@ -79202,7 +79202,8 @@ function QueryCtrl($scope, $modal, $routeParams, $location, elastic, aggregateBu
         $scope.metaResults = {};
 
         elastic.doSearch(request, function (results) {
-            $scope.queryResults = results.hits.filter(function(item){return item._index!='constitution'});
+            $scope.queryResults = results.hits;
+            $scope.queryResults.hits = results.hits.hits.filter(function(item){return item._index!='constitution'});
             for(var i=0; i< $scope.queryResults.hits.length; i++){
                 console.log(i);
                 console.log($scope.queryResults.hits[i]);
