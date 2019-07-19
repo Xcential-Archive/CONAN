@@ -20,7 +20,7 @@ serviceModule.factory('configuration', ['$rootScope', 'localStorage', '$location
             configuration = {
                 title: undefined,
                 description: undefined,
-                includedIndexes: ['fr-notices'],
+                includedIndexes: undefined,
                 displayFields: undefined,
                 highlightFields: undefined,
                 excludedIndexes: ['constitution'],
