@@ -79574,7 +79574,7 @@ serviceModule.factory('configuration', ['$rootScope', 'localStorage', '$location
                 host = $location.protocol() + "://" + $location.host() + ":" + $location.port();
             }
             */
-            host = $location.protocol() +"://" + $location.host()+"/elasticproxy/fr-notices";
+            host = $location.protocol() +"://" + $location.host()+"/elasticproxy";
             //host = "http://localhost:9200";
 
             configuration = {
@@ -79583,7 +79583,7 @@ serviceModule.factory('configuration', ['$rootScope', 'localStorage', '$location
                 includedIndexes: ['fr-notices'],
                 displayFields: undefined,
                 highlightFields: undefined,
-                excludedIndexes: ['fr-notices'],
+                excludedIndexes: ['constitution'],
                 serverUrl: host
             };
         }
