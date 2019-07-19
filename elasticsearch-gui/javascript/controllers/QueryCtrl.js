@@ -182,7 +182,7 @@ function QueryCtrl($scope, $modal, $routeParams, $location, elastic, aggregateBu
     $scope.resetQuery = function () {
         $scope.loadIndices();
         $scope.query.term = "";
-        $scope.query.chosenIndices = [];
+        $scope.query.chosenIndices = ['fr-notices'];
         $scope.query.chosenTypes = [];
         $scope.query.chosenFields = [];
         $scope.query.advanced = {};
