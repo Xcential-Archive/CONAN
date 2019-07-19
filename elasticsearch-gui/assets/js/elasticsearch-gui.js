@@ -79210,7 +79210,7 @@ function QueryCtrl($scope, $modal, $routeParams, $location, elastic, aggregateBu
             }
             $scope.aggsResults = results.aggregations;
             $scope.numPages = Math.ceil(results.hits.total / $scope.pageSize);
-            $scope.totalItems = results.hits.total;
+            $scope.totalItems = $scope.queryResults.hits?$scope.queryResults.hits.length:0;
 
             $scope.metaResults.totalShards = results._shards.total;
             if (results._shards.failed > 0) {
