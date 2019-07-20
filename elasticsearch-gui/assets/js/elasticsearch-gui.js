@@ -79562,7 +79562,8 @@ serviceModule.factory('aggregateBuilder', function () {
 serviceModule.factory('configuration', ['$rootScope', 'localStorage', '$location', function ($rootScope, localStorage, $location) {
     function LocalStorageService(localStorage) {
         var LOCAL_STORAGE_ID = 'es-config',
-            configurationString = localStorage[LOCAL_STORAGE_ID];
+            //configurationString = localStorage[LOCAL_STORAGE_ID];
+            configurationString = false;
 
         var configuration;
         if (configurationString) {
