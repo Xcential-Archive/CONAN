@@ -79581,10 +79581,10 @@ serviceModule.factory('configuration', ['$rootScope', 'localStorage', '$location
             configuration = {
                 title: undefined,
                 description: undefined,
-                includedIndexes: undefined,
+                includedIndexes: 'fr-notice',
                 displayFields: undefined,
                 highlightFields: undefined,
-                excludedIndexes: ['constitution'],
+                excludedIndexes: 'constitution',
                 serverUrl: host
             };
         }
